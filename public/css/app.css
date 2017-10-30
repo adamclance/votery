@@ -1,0 +1,23 @@
+.log-in-form, .register-form {
+    border: 1px solid #cacaca;
+    padding: 1rem;
+    border-radius: 0;
+    width: 47%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    min-width: 275px;
+    margin-bottom: 15px;
+}
+
+.google-sign {
+    width: 100%;
+    text-align: center;
+    display: block;
+    padding-bottom: 15px;
+}
+
+.main {
+    text-align: center;
+    padding-top: 20px;
+}

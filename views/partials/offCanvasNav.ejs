@@ -1,0 +1,18 @@
+<!-- Menu -->
+<ul class="vertical menu">
+    <% if(user) { %>
+        <li>
+            <a href="/profile">Account</a>
+        </li>
+    <% } else { %>
+        <li>
+            <a href="">Login</a>
+        </li>
+        <li>
+            <a href="">Register</a>
+        </li>
+    <% } %>
+    <li>
+        <a href="/ballots">Ballots</a>
+    </li>
+</ul>
