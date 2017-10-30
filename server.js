@@ -60,51 +60,11 @@ app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
-// Initialize Passport and restore authentication state, if any, from the
-// session.
+// Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Define routes.
-app.get('/',
-  function(req, res) {
-    res.render('index', { user: req.user });
-  });
-
-app.get('/login',
-  function(req, res){
-    if (req.user) {
-      res.redirect('/');
-    } else {
-      res.render('login', { user: req.user });
-    }
-  });
-
-app.get('/register',
-  function(req, res){
-    if (req.user) {
-      res.redirect('/');
-    } else {
-      res.render('register', { user: req.user });
-    }
-  });
-  
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/');
-  });
-  
-app.get('/logout',
-  function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
-
-app.get('/profile',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('profile', { user: req.user });
-  });
+app.use(require('./routes/index'));
 
 app.listen(3000);

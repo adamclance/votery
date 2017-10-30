@@ -32,25 +32,25 @@ let ballotsRankedSubmitted = [
     },
     {
         userId: 3,
-        choices: choices: [
+        choices: [
             'Mr. Rogers',
-            'Choco "Chip" Dough - Republican for Vice Ice'            
+            'Choco "Chip" Dough - Republican for Vice Ice',            
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
             'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice',
         ]
     },
     {
         userId: 4,
-        choices: choices: [
+        choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
             'Mr. Rogers',            
-            'Choco "Chip" Dough - Republican for Vice Ice'            
+            'Choco "Chip" Dough - Republican for Vice Ice',            
             'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice',
         ]
     }
 ];
 
-exports.tallyScores = () => {
+exports.tallyScores = (ballotsRankedSubmitted) => {
     let candidates = [];
 
     // Round 1 ranking. First choice rankings are tallied.
@@ -58,7 +58,7 @@ exports.tallyScores = () => {
         const candidate = ballot.choices[0];
 
         // If candidate doesn't yet exist push to arr and add 1 vote
-        if (_.findWhere(candidates, {name: candidate})) {
+        if (!_.findWhere(candidates, {name: candidate})) {
             candidates.push({ name: candidate, votes: 1 });
         } else {
             // Else add 1 vote to existing candidate
@@ -68,7 +68,7 @@ exports.tallyScores = () => {
     });
     
     // Sort primary candidate array to get first 2 choices
-    candidates = _.sortBy(candidates, 'votes');
+    candidates = _.sortBy(candidates, 'votes').reverse();
 
     // If a candidate has a majority we have a winner
     // Else eliminate last place candidate and distribute results
@@ -88,7 +88,7 @@ exports.tallyScores = () => {
     
             // Distribute eliminated candidates votes
             if (candidate === lastPlace) {
-                for (let i = 1; i <= ballot.choices.length; i++) {
+                for (let i = 1; i < ballot.choices.length; i++) {
                     if (_.findWhere(candidates, {name: ballot.choices[i].name})) {
                         let index = _.findIndex(candidates, (cand) => cand.name === ballot.choices[i].name);
                         candidates[index].votes++;
@@ -100,8 +100,12 @@ exports.tallyScores = () => {
         });
 
         // Sort candidates by votes. Loop will continue until a winner is found.
-        candidates = _.sortBy(candidates, 'votes');
+        candidates = _.sortBy(candidates, 'votes').reverse();
     }
 
     return candidates;
 };
+
+exports.ballotsRanked = ballotsRanked;
+
+exports.ballotsRankedSubmitted = ballotsRankedSubmitted;

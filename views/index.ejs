@@ -1,3 +1,36 @@
 <% layout('layout') -%>
 
-<h1>Index page!</h1>
+<h1>Currently running elections:</h1>
+
+<div class="election-thumb-ranked">
+    <h2>Ranked:</h2>
+
+    <div class="ballot">
+        <div class="ballot-candidates">
+            <% for (var i = 0; i < ballotsRanked.length; i++) { %>
+                <%= ballotsRanked[i].name %>
+        
+                <ul>
+                    <% for (var j = 0; j < ballotsRanked[i].options.length; j++) { %>
+                        <li>
+                            <%= ballotsRanked[i].options[j].name %>
+                        </li>
+                    <% } %>
+                </ul>
+            <% } %>
+        </div>
+
+        <div class="ballot-results">
+            <ul>
+                <% for (var i = 0; i < rankedResults.length; i++) { %>
+                    <li>
+                        Candidate: <%= rankedResults[i].name %>
+                    </li>
+                    <li>
+                        Votes: <%= rankedResults[i].votes %>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>
