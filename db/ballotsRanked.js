@@ -62,7 +62,7 @@ exports.tallyScores = () => {
             candidates.push({ name: candidate, votes: 1 });
         } else {
             // Else add 1 vote to existing candidate
-            const index = _.findIndex(candidates, (cand) => cand.name === candidate);
+            let index = _.findIndex(candidates, (cand) => cand.name === candidate);
             candidates[index].votes++;
         }
     });
@@ -70,25 +70,38 @@ exports.tallyScores = () => {
     // Sort primary candidate array to get first 2 choices
     candidates = _.sortBy(candidates, 'votes');
 
-    let stillRunning = candidates.slice(0, 2);
-    stillRunning = [stillRunning[0].name, stillRunning[1].name];
+    // If a candidate has a majority we have a winner
+    // Else eliminate last place candidate and distribute results
+    if (candidates[0].votes > candidates[1].votes) {
+        return candidates;
+    }
 
-    // Round 2 ranking. Secondary votes of eliminated candidates are tallied.
-    _.each(ballotsRankedSubmitted, (ballot) => {
-        const candidate = ballot.choices[0];
-        const secondary = ballot.choices[1];
+    while (candidates[0].votes === candidates[1].votes) {
+        const lastPlace = candidates.last().name;
 
-        // Only tally secondary votes of ballots where first choice is eliminated
-        if (!_.indexOf(stillRunning, candidate)) {
-            const index = _.findIndex(candidates, (cand) => cand.name === secondary);
-            candidates[index].votes++;
-        }
-    });
 
-    // Now that all votes are tallied we can determine a winner
-    // Sort candidates arr by votes and get winner
-    candidates = _.sortBy(candidates, 'votes');
+        _.each(ballotsRankedSubmitted, (ballot) => {
+            const candidate = ballot.choices[0];
 
-    // Returns results with first 2 candidates in running in case of tie and for display purposes.
-    return candidates.slice(0, 2);
+            // Remove eliminated candidate from running
+            candidates.pop();
+    
+            // Distribute eliminated candidates votes
+            if (candidate === lastPlace) {
+                for (let i = 1; i <= ballot.choices.length; i++) {
+                    if (_.findWhere(candidates, {name: ballot.choices[i].name})) {
+                        let index = _.findIndex(candidates, (cand) => cand.name === ballot.choices[i].name);
+                        candidates[index].votes++;
+
+                        break;
+                    }
+                }
+            }
+        });
+
+        // Sort candidates by votes. Loop will continue until a winner is found.
+        candidates = _.sortBy(candidates, 'votes');
+    }
+
+    return candidates;
 };
