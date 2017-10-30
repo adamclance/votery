@@ -3,10 +3,9 @@
 <h1>Currently running elections:</h1>
 
 <div class="election-thumb-ranked">
-    <h2>Ranked:</h2>
-
     <div class="ballot">
         <div class="ballot-candidates">
+            <h3>Ballot:</h3>
             <% for (var i = 0; i < ballotsRanked.length; i++) { %>
                 <%= ballotsRanked[i].name %>
         
@@ -21,6 +20,7 @@
         </div>
 
         <div class="ballot-results">
+            <h3>Results:</h3>
             <ul>
                 <% for (var i = 0; i < rankedResults.length; i++) { %>
                     <li>
