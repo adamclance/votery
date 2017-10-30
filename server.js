@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var path = require('path');
 var db = require('./db');
 
 
@@ -45,7 +46,10 @@ passport.deserializeUser(function(id, cb) {
 // Create a new Express application.
 var app = express();
 
+app.use(express.static('./public'));
+
 // Configure view engine to render EJS templates.
+app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -64,16 +68,29 @@ app.use(passport.session());
 // Define routes.
 app.get('/',
   function(req, res) {
-    res.render('home', { user: req.user });
+    res.render('index', { user: req.user });
   });
 
 app.get('/login',
   function(req, res){
-    res.render('login');
+    if (req.user) {
+      res.redirect('/');
+    } else {
+      res.render('login', { user: req.user });
+    }
+  });
+
+app.get('/register',
+  function(req, res){
+    if (req.user) {
+      res.redirect('/');
+    } else {
+      res.render('register', { user: req.user });
+    }
   });
   
 app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   });

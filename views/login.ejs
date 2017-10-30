@@ -1,13 +1,14 @@
-<form action="/login" method="post">
-	<div>
-	<label>Username:</label>
-	<input type="text" name="username"/><br/>
-	</div>
-	<div>
-	<label>Password:</label>
-	<input type="password" name="password"/>
-	</div>
-	<div>
-	<input type="submit" value="Submit"/>
-	</div>
+<% layout('layout') -%>
+
+<form class="log-in-form" method="POST" action="/login">
+  <h4 class="text-center">Login</h4>
+  <label>Username
+    <input name="username" type="text" placeholder="somebody@example.com">
+  </label>
+  <label>Password
+    <input name="password" type="password" placeholder="Password">
+  </label>
+  <p>
+    <input type="submit" class="button expanded" value="Log in"></input>
+  </p>
 </form>
