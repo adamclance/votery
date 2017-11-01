@@ -1,0 +1,21 @@
+<% layout('layout') -%>
+
+<div class="ballot-fill">
+    <h2><%= ballot.name %></h2>
+
+    <span class="ballot-description"><%= ballot.description %></span>
+
+    <ul id="rankedBallotSort" class="rankedBallotSort" data-ballot-id="<%= ballotId %>">
+        <% for (var i = 0; i < ballot.options.length; i++) { %>
+            <li><%= ballot.options[i].name %></li>
+        <% } %>
+    </ul>
+
+    <input class="candidate-add-input" placeholder="Write in candidate" type="text" />
+    <a class="candidate-add-button">Add</a>
+</div>
+
+<a class="ranked-ballot-submit">Submit</a>
+
+<% script('/js/vendor/Sortable.min.js') -%>
+<% script('/js/voteRanked.js') -%>

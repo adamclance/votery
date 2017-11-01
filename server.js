@@ -46,7 +46,7 @@ passport.deserializeUser(function(id, cb) {
 // Create a new Express application.
 var app = express();
 
-app.use(express.static('./public'));
+app.use('/', express.static(path.join(__dirname + '/public')));
 
 // Configure view engine to render EJS templates.
 app.engine('ejs', require('ejs-locals'));
@@ -58,7 +58,7 @@ app.set('view engine', 'ejs');
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('express-session')({ secret: 'aeggjtrftrled', resave: false, saveUninitialized: false }));
 
 // Initialize Passport and restore authentication state, if any, from the session.
 app.use(passport.initialize());

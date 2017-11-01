@@ -6,6 +6,9 @@
     "express",
     "passport"
   ],
+  "scripts": {
+    "start": "nodemon ./server.js"
+  },
   "author": "Adam Lance",
   "license": "Unlicense",
   "dependencies": {
@@ -17,6 +20,7 @@
     "express": "^4.13.3",
     "express-session": "^1.11.3",
     "morgan": "^1.6.1",
+    "nodemon": "^1.12.1",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",

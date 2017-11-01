@@ -1,36 +1,49 @@
 <% layout('layout') -%>
 
-<h1>Currently running elections:</h1>
+<div class="cell small-12">
+    <div class="grid-x grid-margin-x">
+        <!-- Currently running ballots -->
+        <% for (var i = 0; i < ballotsRanked.length; i++) { %>
+            <div class="card cell small-12 medium-6">
+                <div class="card-divider">
+                    BALLOT <%= ballotsRanked[i].name %>
+                </div>
+                
+                <div class="card-section">
+                    <ul class="ballot-list">
+                        <% for (var j = 0; j < ballotsRanked[i].options.length; j++) { %>
+                            <li class="ballot-list-item">
+                                <%= ballotsRanked[i].options[j].name %>
+                            </li>
+                        <% } %>
+                    </ul>
+                </div>
+            
+                <a class="button" href="/vote/ranked/<%= ballotsRanked[i].id %>">Vote now</a>  
+            </div>              
+        <% } %>
 
-<div class="election-thumb-ranked">
-    <div class="ballot">
-        <div class="ballot-candidates">
-            <h3>Ballot:</h3>
-            <% for (var i = 0; i < ballotsRanked.length; i++) { %>
-                <%= ballotsRanked[i].name %>
-        
-                <ul>
-                    <% for (var j = 0; j < ballotsRanked[i].options.length; j++) { %>
-                        <li>
-                            <%= ballotsRanked[i].options[j].name %>
+        <!-- Completed elections -->
+        <% for (var i = 0; i < rankedResults.length; i++) { %>
+            <div class="card cell small-12 medium-6">
+                <div class="card-divider">
+                    RESULTS FOR <%= rankedResults[i].name %>
+                </div>
+                
+                <ul class="ballot-list">
+                    <% for (var j = 0; j < rankedResults[i].scores.length; j++) { %>
+                        <li class="ballot-list-item">
+                            <span class="ballot-result-candidate">Candidate: <%= rankedResults[i].scores[j].name %></span>
+
+                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= rankedResults[i].scores[j].percentage %>" aria-valuemin="0" aria-valuetext="<%= rankedResults[i].scores[j].percentage %> percent" aria-valuemax="100">
+                                <span class="progress-meter" style="width: <%= rankedResults[i].scores[j].percentage %>%">
+                                    <p class="progress-meter-text"><%= rankedResults[i].scores[j].percentage %>%</p>
+                                </span>
+                            </div>
                         </li>
                     <% } %>
                 </ul>
-            <% } %>
-        </div>
-
-        <div class="ballot-results">
-            <h3>Results:</h3>
-            <ul>
-                <% for (var i = 0; i < rankedResults.length; i++) { %>
-                    <li>
-                        Candidate: <%= rankedResults[i].name %>
-                    </li>
-                    <li>
-                        Votes: <%= rankedResults[i].votes %>
-                    </li>
-                <% } %>
-            </ul>
-        </div>
+            </div>
+        <% } %>
     </div>
 </div>

@@ -16,6 +16,7 @@ let ballotsRanked = [
 let ballotsRankedSubmitted = [
     {
         userId: 1,
+        ballotId: 1,
         choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
             'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice',
@@ -24,6 +25,7 @@ let ballotsRankedSubmitted = [
     },
     {
         userId: 2,
+        ballotId: 1,
         choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
             'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice',
@@ -32,8 +34,8 @@ let ballotsRankedSubmitted = [
     },
     {
         userId: 3,
+        ballotId: 1,
         choices: [
-            'Mr. Rogers',
             'Choco "Chip" Dough - Republican for Vice Ice',            
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
             'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice',
@@ -41,20 +43,20 @@ let ballotsRankedSubmitted = [
     },
     {
         userId: 4,
+        ballotId: 1,
         choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
-            'Mr. Rogers',            
             'Choco "Chip" Dough - Republican for Vice Ice',            
             'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice',
         ]
     }
 ];
 
-exports.tallyScores = (ballotsRankedSubmitted) => {
+exports.tallyScores = (ballotsSubmitted) => {
     let candidates = [];
 
     // Round 1 ranking. First choice rankings are tallied.
-    _.each(ballotsRankedSubmitted, (ballot) => {
+    _.each(ballotsSubmitted, (ballot) => {
         const candidate = ballot.choices[0];
 
         // If candidate doesn't yet exist push to arr and add 1 vote
@@ -80,7 +82,7 @@ exports.tallyScores = (ballotsRankedSubmitted) => {
         const lastPlace = candidates.last().name;
 
 
-        _.each(ballotsRankedSubmitted, (ballot) => {
+        _.each(ballotsSubmitted, (ballot) => {
             const candidate = ballot.choices[0];
 
             // Remove eliminated candidate from running
@@ -104,6 +106,36 @@ exports.tallyScores = (ballotsRankedSubmitted) => {
     }
 
     return candidates;
+};
+
+exports.getBallotById = (id) => {
+    return _.findWhere(ballotsRanked, {id: +id});
+};
+
+exports.getElectionResults = (ballotId) => {
+    const ballot = _.findWhere(ballotsRanked, { id: ballotId });
+    const ballotsSubmitted = _.filter(ballotsRankedSubmitted, (ballot) => ballot.ballotId === ballotId);
+
+    const name = ballot.name;
+    const scores = this.tallyScores(ballotsSubmitted);
+
+    let totalVotes = 0;
+
+    _.each(scores, (score) => totalVotes += score.votes);
+
+    _.each(scores, (score) => score.percentage = Math.round(score.votes / totalVotes * 100));
+
+    return { name, scores, totalVotes };
+};
+
+exports.getAllElectionResults = () => {
+    let elections = [];
+
+    _.each(ballotsRanked, (ballot) => {
+        elections.push(this.getElectionResults(ballot.id));
+    });
+
+    return elections;
 };
 
 exports.ballotsRanked = ballotsRanked;

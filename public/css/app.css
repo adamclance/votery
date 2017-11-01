@@ -18,6 +18,28 @@
 }
 
 .main {
+    padding:25px;
+}
+
+.ballot-list {
+    list-style: none;
+}
+
+.ballot-list-item {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.ballot-list-item:last-child {
+    border-bottom: none;
+}
+
+.card-divider {
     text-align: center;
-    padding-top: 20px;
+    display: block;
+}
+
+.progress-meter {
+    margin-top: 30px;
 }
