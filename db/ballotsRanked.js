@@ -160,16 +160,18 @@ exports.checkDuplicates = (userId, ballotId) => {
     return _.findWhere(this.ballotsRankedSubmitted, { userId, ballotId });
 }
 
-exports.submitBallot = (data, res) => {
-    if (this.checkDuplicates(data.userId, +data.ballotId)) {
-        res.send({ msg: 'You may only vote 1 time.' });
+exports.submitBallot = (data, userId, res) => {
+    if (this.checkDuplicates(userId, +data.id)) {
+        res.send('You may only vote 1 time.');
     } else {
         this.ballotsRankedSubmitted.push({ 
-            userId: data.userId, 
-            ballotId: +data.ballotId, 
+            userId: userId, 
+            ballotId: +data.id, 
             choices: data.choices,
             timeStamp: new Date(Date.now()).toLocaleString('en-US', {timeZone: 'UTC'}) 
         });
+
+        res.send('Your ballot has been submitted!');
     }
 }
 

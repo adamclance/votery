@@ -1,21 +1,46 @@
 <% layout('layout') -%>
 
-<div class="ballot-fill">
-    <h2><%= ballot.name %></h2>
+<% var disabledClass = '' %>
 
-    <span class="ballot-description"><%= ballot.description %></span>
+<% if (alreadyVoted) { %>
+    <% disabledClass = 'disabled' %>
+    <div class="callout alert">
+        <h5>You already casted your vote for this ballot!</h5>
+        <a href="/">Go back home.</a>
+    </div>
+<% } %>
 
-    <ul id="rankedBallotSort" class="rankedBallotSort" data-ballot-id="<%= ballotId %>">
-        <% for (var i = 0; i < ballot.options.length; i++) { %>
-            <li><%= ballot.options[i].name %></li>
-        <% } %>
-    </ul>
+<div class="card">
+    <div class="card-divider">
+        <%= ballot.name %>
+    </div>
 
-    <input class="candidate-add-input" placeholder="Write in candidate" type="text" />
-    <a class="candidate-add-button">Add</a>
+    <div class="card-section">
+        <%= ballot.description %> <br/><br/>
+        Drag and drop each candidate to your desired rank.
+    </div>
+
+    <div class="card-section">
+        <ol id="rankedBallotSort" class="rankedBallotSort" data-ballot-id="<%= ballotId %>">
+            <% for (var i = 0; i < ballot.options.length; i++) { %>
+                <li class="rankedBallotSort-choice">
+                    <%= ballot.options[i].name %>
+                </li>
+            <% } %>
+        </ol>
+    </div>
+
+    <div class="card-section input-group">
+        <input class="candidate-add-input input-group-field" placeholder="Write in candidate" type="text" />
+        <div class="input-group-button">
+            <a class="candidate-add-button button <%= disabledClass %>">Add</a>
+        </div>
+    </div>
+
+    <div class="card-section">
+        <a class="ranked-ballot-submit button expanded  <%= disabledClass %>">SUBMIT BALLOT</a>
+    </div>
 </div>
-
-<a class="ranked-ballot-submit">Submit</a>
 
 <% script('/js/vendor/Sortable.min.js') -%>
 <% script('/js/voteRanked.js') -%>

@@ -47,3 +47,13 @@
 .account-card {
     margin-bottom: 25px;
 }
+
+.rankedBallotSort-choice {
+    padding: 10px;
+    background-color: #ccc;
+    border: 1px solid;
+}
+
+.candidate-add-button {
+    padding-top: 0.85em !important;
+}

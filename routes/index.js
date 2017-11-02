@@ -56,17 +56,19 @@ router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=t
 
 
 router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function (req, res) {
-	var ballot = DB.ballotsRanked.getBallotById(req.params.id);
+	const ballot = DB.ballotsRanked.getBallotById(req.params.id);
+	const alreadyVoted = !!DB.ballotsRanked.getSubmittedByUser(req.user.id);
 
 	res.render('voteRanked', {
 		user: req.user,
-		ballot: ballot,
-		ballotId: req.params.id
+		ballot,
+		ballotId: req.params.id,
+		alreadyVoted
 	});
 });
 
 router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function (req, res) {
-	DB.ballotsRanked.submitBallot(req.body, res);
+	DB.ballotsRanked.submitBallot(req.body, req.user.id, res);
 });
 
 module.exports = router;
