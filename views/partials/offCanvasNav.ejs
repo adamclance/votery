@@ -1,22 +1,25 @@
 <!-- Menu -->
 <ul class="vertical menu">
+    <li class="side-menu-item">
+        <a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+    </li>
     <% if(user) { %>
+        <li class="side-menu-item">
+            <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+        </li class="side-menu-item">
         <li>
-            <a href="/logout">Logout</a>
-        </li>
-        <li>
-            <a href="/account">Account</a>
+            <a href="/account"><i class="fa fa-user-circle" aria-hidden="true"></i> Account</a>
         </li>
     <% } else { %>
-        <li>
-            <a data-open="loginModal">Login</a>
+        <li class="side-menu-item">
+            <a data-open="loginModal"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
         </li>
-        <li>
-            <a data-open="registerModal">Register</a>
+        <li class="side-menu-item">
+            <a data-open="registerModal"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
         </li>
     <% } %>
-    
-    <li>
-        <a href="/ballots">Ballots</a>
+
+    <li class="side-menu-item">
+        <a href="/ballots"><i class="fa fa-tasks" aria-hidden="true"></i> Ballots</a>
     </li>
 </ul>

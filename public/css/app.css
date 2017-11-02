@@ -57,3 +57,11 @@
 .candidate-add-button {
     padding-top: 0.85em !important;
 }
+
+.vertical.menu [class^="fa"] {
+    width: 25px;
+}
+
+.side-menu-item {
+    margin-top: 5px;
+}
