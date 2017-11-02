@@ -1,6 +1,36 @@
 var records = [
-    { id: 1, username: 'jack', password: 'secret', displayName: 'Jack', emails: [ { value: 'jack@example.com' } ] }
-  , { id: 2, username: 'jill', password: 'birthday', displayName: 'Jill', emails: [ { value: 'jill@example.com' } ] }
+    { 
+      id: 1, 
+      username: 'jack', 
+      password: 'secret', 
+      firstName: 'Jack',
+      lastName: 'Black', 
+      email: 'jack@example.com',
+      residence: {
+        state: 'OH',
+        city: 'Cleveland',
+        zip: '44105'
+      },
+      ballots: {
+        ranked: [1],
+        simpleMajority: [],
+        pickTwo: []
+      }
+    },
+    { 
+      id: 2, 
+      username: 'jill', 
+      password: 'birthday', 
+      firstName: 'Jill',
+      lastName: 'Dill', 
+      email: 'jill@example.com',
+      residence: {
+        state: 'OH',
+        city: 'Cleveland',
+        zip: '44105'
+      },
+       
+    }
 ];
 
 exports.findById = function(id, cb) {
@@ -25,3 +55,5 @@ exports.findByUsername = function(username, cb) {
     return cb(null, null);
   });
 }
+
+exports.userData = records;
