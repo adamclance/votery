@@ -34,28 +34,7 @@ router.get('/logout', function(req, res){
 });
 
 router.post('/register', function(req, res) {
-  let userData = DB.users.userData;
-
-  const newUser = { 
-    id: userData[userData.length - 1].id + 1, 
-    username: req.body.username, 
-    password: req.body.password, 
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    residence: {
-      state: req.body.state,
-      city: req.body.city,
-      zip: req.body.zip
-    },
-    ballots: {
-      ranked: [],
-      simpleMajority: [],
-      pickTwo: []
-    }
-  }
-
-  userData.push(newUser);
+  DB.users.create(req.body);
 
   req.login(newUser, function (err) {
     if ( ! err ){

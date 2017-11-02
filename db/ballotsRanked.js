@@ -15,7 +15,7 @@ let ballotsRanked = [
 
 let ballotsRankedSubmitted = [
     {
-        userId: 1,
+        userId: '500ed008-cb0d-4a70-9950-c9b2cd2ba17c',
         ballotId: 1,
         choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
@@ -24,7 +24,7 @@ let ballotsRankedSubmitted = [
         ]
     },
     {
-        userId: 2,
+        userId: 'd2db10db-f24c-428c-b982-a38c2331ba3b',
         ballotId: 1,
         choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
@@ -33,7 +33,7 @@ let ballotsRankedSubmitted = [
         ]
     },
     {
-        userId: 3,
+        userId: '2d5dc4bd-2f0d-47e8-9aa5-97a2111a6b80',
         ballotId: 1,
         choices: [
             'Choco "Chip" Dough - Republican for Vice Ice',            
@@ -42,7 +42,7 @@ let ballotsRankedSubmitted = [
         ]
     },
     {
-        userId: 4,
+        userId: '9bed7059-c3d5-41ae-8c0c-e9a16e0b6f2d',
         ballotId: 1,
         choices: [
             'Reese WithoutASpoon - Democrat for C.I.C Cherry Garcia - Democrat for Vice Ice',
@@ -103,6 +103,11 @@ exports.tallyScores = (ballotsSubmitted) => {
 
         // Sort candidates by votes. Loop will continue until a winner is found.
         candidates = _.sortBy(candidates, 'votes').reverse();
+
+        // Break loop in case of tie
+        if (candidates.length === 2) {
+            break;
+        }
     }
 
     return candidates;
