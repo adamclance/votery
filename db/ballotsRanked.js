@@ -138,6 +138,10 @@ exports.getAllElectionResults = () => {
     return elections;
 };
 
+exports.checkDuplicates = (userId, ballotId) => {
+    return _.findWhere(this.ballotsRankedSubmitted, {userId, ballotId});
+}
+
 exports.ballotsRanked = ballotsRanked;
 
 exports.ballotsRankedSubmitted = ballotsRankedSubmitted;

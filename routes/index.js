@@ -66,12 +66,12 @@ router.post('/register', function(req, res) {
 })
 });
 
-router.get('/profile', require('connect-ensure-login').ensureLoggedIn(), function(req, res) {
+router.get('/profile', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function(req, res) {
   res.render('profile', { user: req.user });
 });
 
 
-router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn(), function(req, res) {
+router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function(req, res) {
   var ballot = DB.ballotsRanked.getBallotById(req.params.id);
 
   res.render('voteRanked', { 
@@ -81,12 +81,16 @@ router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn(),
   });
 });
 
-router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn(), function(req, res) {
-  var ballotId = req.body.id;
+router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function(req, res) {
+  var ballotId = +req.body.id;
   var choices = req.body.choices;
   var userId = req.user.id;
 
-  DB.ballotsRanked.ballotsRankedSubmitted.push({ userId, ballotId: +ballotId, choices });
+  if (DB.ballotsRanked.checkDuplicates(userId, ballotId)) {
+    res.send({msg: 'You may only vote 1 time.'});
+  } else {
+    DB.ballotsRanked.ballotsRankedSubmitted.push({ userId, ballotId, choices });    
+  }
 });
 
 module.exports = router;
