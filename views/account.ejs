@@ -1,0 +1,85 @@
+<% layout('layout') -%>
+
+<div class="card account-card">
+    <div class="card-divider">
+        Account information
+    </div>
+
+    <table class="hover striped stack">
+        <thead>
+            <tr>
+                <th>UUID</th>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Zipcode</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>
+                    <%= user.id %>
+                </td>
+                <td>
+                    <%= user.username %>
+                </td>
+                <td>
+                    <%= user.firstName %>
+                </td>
+                <td>
+                    <%= user.lastName %>
+                </td>
+                <td>
+                    <%= user.email %>
+                </td>
+                <td>
+                    <%= user.residence.state %>
+                </td>
+                <td>
+                    <%= user.residence.city %>
+                </td>
+                <td>
+                    <%= user.residence.zip %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<% layout('layout') -%>
+
+<div class="card account-card">
+    <div class="card-divider">
+        Submitted ballots
+    </div>
+
+    <table class="hover striped stack">
+        <thead>
+            <tr>
+                <th>Ballot Name</th>
+                <th>Choices</th>
+                <th>Timestamp (UTC)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for (var i = 0; i < ballots.length; i++) { %>
+                <tr>
+                    <td><%= ballots[i].ballotName %></td>
+                    <td>
+                        <ol>
+                            <% for (var j = 0; j < ballots[i].choices.length; j++) { %>
+                                <li><%= ballots[i].choices[j] %></li>
+                            <% } %>
+                        </ol>
+                    </td>
+                    <td><%= ballots[i].timeStamp %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
