@@ -2,6 +2,9 @@
 <ul class="vertical menu">
     <% if(user) { %>
         <li>
+            <a href="/logout">Logout</a>
+        </li>
+        <li>
             <a href="/account">Account</a>
         </li>
     <% } else { %>
@@ -12,6 +15,7 @@
             <a data-open="registerModal">Register</a>
         </li>
     <% } %>
+    
     <li>
         <a href="/ballots">Ballots</a>
     </li>
