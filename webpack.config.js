@@ -13,18 +13,20 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                  fallback: 'style-loader',
-                  use: ['css-loader', 'sass-loader']
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
                 })
-            }
-        ],
-        loaders: [
+            },
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', { loose: true, modules: false }]
-                }
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015'],
+                        },
+                    },
+                ],
             }
         ]
     },
@@ -34,6 +36,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
-        })
+        }),
+        new webpack.optimize.UglifyJsPlugin()
     ]
 }
