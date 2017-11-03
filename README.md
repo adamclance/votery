@@ -14,7 +14,7 @@ $ yarn
 Start the server.
 
 ```bash
-$ yarn
+$ yarn start
 ```
 
 Start the server in dev mode. This will watch your files and automatically create your bundles on file change.
