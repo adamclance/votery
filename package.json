@@ -1,7 +1,7 @@
 {
-  "name": "votem-coding-assessment",
+  "name": "votery",
   "version": "0.0.0",
-  "description": "Sample voting app",
+  "description": "A simple voting app written in nodeJS.",
   "keywords": [
     "express",
     "passport"
