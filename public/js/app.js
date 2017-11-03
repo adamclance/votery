@@ -1,7 +1,7 @@
 import $ from '../../node_modules/jquery/dist/jquery';
 import whatInput from '../../node_modules/what-input/dist/what-input';
 import { foundation } from '../../node_modules/foundation-sites/dist/js/foundation';
-import {voteRanked} from './voteRanked';
+import voteRankedPage from './voteRanked';
 
 $(document).ready(function() {
     $(document).foundation();
@@ -26,5 +26,5 @@ window.onload = () => {
 const windowLoc = window.location.pathname;
 
 if (windowLoc.indexOf('vote/ranked') > -1) {
-    voteRanked();
+    new voteRankedPage();
 }
