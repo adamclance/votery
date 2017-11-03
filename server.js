@@ -1,8 +1,8 @@
-var express = require('express');
-var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var path = require('path');
-var db = require('./db');
+const express = require('express');
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
+const path = require('path');
+const users = require('./controllers/users');
 
 
 // Configure the local strategy for use by Passport.
@@ -12,8 +12,8 @@ var db = require('./db');
 // that the password is correct and then invoke `cb` with a user object, which
 // will be set at `req.user` in route handlers after authentication.
 passport.use(new Strategy(
-  function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
+  (username, password, cb) => {
+    users.findByUsername(username, (err, user) => {
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
       if (user.password != password) { return cb(null, false); }
@@ -29,12 +29,12 @@ passport.use(new Strategy(
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
-passport.serializeUser(function(user, cb) {
+passport.serializeUser((user, cb) => {
   cb(null, user.id);
 });
 
-passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
+passport.deserializeUser((id, cb) => {
+  users.findById(id, (err, user) => {
     if (err) { return cb(err); }
     cb(null, user);
   });
@@ -44,7 +44,7 @@ passport.deserializeUser(function(id, cb) {
 
 
 // Create a new Express application.
-var app = express();
+const app = express();
 
 app.use('/', express.static(path.join(__dirname + '/public')));
 

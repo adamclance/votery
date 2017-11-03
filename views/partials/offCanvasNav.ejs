@@ -22,4 +22,14 @@
     <li class="side-menu-item">
         <a href="/ballots"><i class="fa fa-tasks" aria-hidden="true"></i> Ballots</a>
     </li>
+
+    <!-- Admin links -->
+    <% if (user && user.role === 'admin') { %>
+        <li>
+            <a href="/ballots/manage"><i class="fa fa-file" aria-hidden="true"></i> Manage ballots</a>
+        </li>
+        <li>
+            <a href="/ballots/create"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add ballot</a>
+        </li>
+    <% } %>
 </ul>

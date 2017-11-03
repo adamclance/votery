@@ -1,22 +1,20 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('passport');
-var path = require('path');
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
+const path = require('path');
 
-// Bootstrap database
-var DB = require('../db/index');
+const users = require('../controllers/users');
+const ballotsRanked = require('../controllers/ballotsRanked');
 
-console.log('users', DB.users.userData);
-
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
 	res.render('index', {
 		user: req.user,
-		rankedResults: DB.ballotsRanked.getAllElectionResults() || [],
-		ballotsRanked: DB.ballotsRanked.ballotsRanked || []
+		rankedResults: ballotsRanked.getAllElectionResults() || [],
+		ballotsRanked: ballotsRanked.ballotsRanked || []
 	});
 });
 
-router.get('/login', function (req, res) {
+router.get('/login', (req, res) => {
 	if (req.user) {
 		res.redirect('/');
 	} else {
@@ -24,21 +22,21 @@ router.get('/login', function (req, res) {
 	}
 });
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), function (req, res) {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
 	res.redirect('/');
 });
 
-router.get('/logout', function (req, res) {
+router.get('/logout', (req, res) => {
 	req.logOut();
-	req.session.destroy(function (err) {
+	req.session.destroy((err) => {
 		res.redirect('/');
 	});
 });
 
-router.post('/register', function (req, res) {
-	DB.users.create(req.body);
+router.post('/register', (req, res) => {
+	users.create(req.body);
 
-	req.login(newUser, function (err) {
+	req.login(newUser, (err) => {
 		if (!err) {
 			res.redirect('/');
 		} else {
@@ -47,17 +45,17 @@ router.post('/register', function (req, res) {
 	})
 });
 
-router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function (req, res) {
+router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	res.render('account', {
 		user: req.user,
-		ballots: DB.ballotsRanked.getSubmittedByUser(req.user.id)
+		ballots: ballotsRanked.getSubmittedByUser(req.user.id)
 	});
 });
 
 
-router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function (req, res) {
-	const ballot = DB.ballotsRanked.getBallotById(req.params.id);
-	const alreadyVoted = !!DB.ballotsRanked.getSubmittedByUser(req.user.id);
+router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
+	const ballot = ballotsRanked.getBallotById(req.params.id);
+	const alreadyVoted = !!ballotsRanked.getSubmittedByUser(req.user.id);
 
 	res.render('voteRanked', {
 		user: req.user,
@@ -67,8 +65,8 @@ router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/
 	});
 });
 
-router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?login=true'), function (req, res) {
-	DB.ballotsRanked.submitBallot(req.body, req.user.id, res);
+router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
+	ballotsRanked.submitBallot(req.body, req.user.id, res);
 });
 
 module.exports = router;
