@@ -21,4 +21,10 @@ window.onload = () => {
     };
 };
 
-voteRanked();
+
+// Page specific methods
+const windowLoc = window.location.pathname;
+
+if (windowLoc.indexOf('vote/ranked') > -1) {
+    voteRanked();
+}

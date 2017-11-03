@@ -9968,7 +9968,12 @@ window.onload = function () {
     };
 };
 
-(0, _voteRanked.voteRanked)();
+// Page specific methods
+var windowLoc = window.location.pathname; //jquery format to get window.location.pathname
+
+if (windowLoc.indexOf('vote/ranked') > -1) {
+    (0, _voteRanked.voteRanked)();
+}
 
 /***/ }),
 /* 3 */
