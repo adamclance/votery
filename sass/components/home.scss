@@ -1,0 +1,17 @@
+.ballot-list {
+    list-style: none;
+}
+
+.ballot-list-item {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.ballot-list-item:last-child {
+    border-bottom: none;
+}
+
+.progress-meter {
+    margin-top: 30px;
+}

@@ -1,0 +1,9 @@
+// Import foundation scss
+@import '../node_modules/foundation-sites/assets/foundation';
+
+// Import app styles
+@import './components/layout';
+@import './components/home';
+@import './components/nav';
+@import './components/account';
+@import './components/rankedBallot';
