@@ -1,0 +1,33 @@
+<% layout('layout') -%>
+
+<div class="card account-card">
+        <div class="card-divider">
+            ALL AVAILABLE BALLOTS
+        </div>
+    
+        <table class="hover striped scroll">
+            <thead>
+                <tr>
+                    <th>Ballot Name</th>
+                    <th>Ballot Description</th>
+                    <th>Type</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <% for (var i = 0; i < ballots.length; i++) { %>
+                    <tr>
+                        <td><%= ballots[i].name %></td>
+                        <td><%= ballots[i].description %></td>
+                        <td><%= ballots[i].type %></td>
+                        <td><a class="button" href="/vote/<%= ballots[i].type %>/<%= ballots[i].id %>">VOTE</a></td>                        
+                        <td><a class="button" href="/ballots/submitted/<%= ballots[i].type %>/<%= ballots[i].id %>">SUBMITTED</a></td>
+                        <td><a class="button" href="/ballots/results/<%= ballots[i].type %>/<%= ballots[i].id %>">RESULTS</a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>

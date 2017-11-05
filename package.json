@@ -16,6 +16,9 @@
   "watch": {
     "public/js/*.js": [
       "build"
+    ],
+    "sass/*.scss": [
+      "build"
     ]
   },
   "author": "Adam Lance",

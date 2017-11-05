@@ -7,10 +7,11 @@ const users = require('../controllers/users');
 const ballotsRanked = require('../controllers/ballotsRanked');
 const ballotsSimple = require('../controllers/ballotsSimple');
 const ballotsPickTwo = require('../controllers/balotsPickTwo');
+const ballots = require('../controllers/ballots');
+const ballotsSubmitted = require('../controllers/ballotsSubmitted');
 const util = require('../lib/util');
 
 router.get('/', (req, res) => {
-	
 	res.render('index', {
 		user: req.user,
 		rankedResults: ballotsRanked.getAllElectionResults() || [],
@@ -106,6 +107,20 @@ router.get('/vote/pick-two/:id', require('connect-ensure-login').ensureLoggedIn(
 
 router.post('/vote/pick-two', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	ballotsPickTwo.submitBallot(req.body, req.user.id, res);
+});
+
+router.get('/ballots', (req, res) => {
+	res.render('ballots', {
+		user: req.user,
+		ballots: ballots.getAllBallots()
+	});
+});
+
+router.get('/ballots/submitted/:type/:id', (req, res) => {
+	res.render('ballotsSubmitted', {
+		user: req.user,
+		ballots: ballotsSubmitted.getSubmitted(req)
+	});
 });
 
 module.exports = router;
