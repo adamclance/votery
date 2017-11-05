@@ -4,7 +4,7 @@ const util = require('../lib/util');
 
 exports.tallyScores = (ballotsSubmitted) => {
     const  tally = { yes: 0, no: 0 }
-    _.each(DB.ballotsSimpleSubmitted, (ballot) => {
+    _.each(ballotsSubmitted, (ballot) => {
         tally[ballot.choice]++;
     });
 
