@@ -56,8 +56,7 @@ router.post('/register', (req, res) => {
 
 router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	res.render('account', {
-		user: req.user,
-		ballots: util.getSubmittedByUser(req.user.id, ballotsRanked.ballotsRankedSubmitted)
+		user: req.user
 	});
 });
 

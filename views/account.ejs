@@ -49,35 +49,3 @@
         </tbody>
     </table>
 </div>
-
-<div class="card account-card">
-    <div class="card-divider">
-        Submitted ballots
-    </div>
-
-    <table class="hover striped stack">
-        <thead>
-            <tr>
-                <th>Ballot Name</th>
-                <th>Choices</th>
-                <th>Timestamp (UTC)</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <% for (var i = 0; i < ballots.length; i++) { %>
-                <tr>
-                    <td><%= ballots[i].ballotName %></td>
-                    <td>
-                        <ol>
-                            <% for (var j = 0; j < ballots[i].choices.length; j++) { %>
-                                <li><%= ballots[i].choices[j] %></li>
-                            <% } %>
-                        </ol>
-                    </td>
-                    <td><%= ballots[i].timeStamp %></td>
-                </tr>
-            <% } %>
-        </tbody>
-    </table>
-</div>

@@ -23,7 +23,7 @@ exports.getElectionResults = (ballotId) => {
     scores.yes = { votes: scores.yes, percentage: Math.round(scores.yes / totalVotes * 100) };
     scores.no = { votes: scores.no, percentage: Math.round(scores.no / totalVotes * 100) };
 
-    return { name, scores, totalVotes };
+    return { name, scores, totalVotes, container: ballot.container };
 }
 
 exports.getAllElectionResults = () => {

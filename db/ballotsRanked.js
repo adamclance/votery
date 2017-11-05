@@ -8,7 +8,8 @@ let ballotsRanked = [
             { id: 2, name: 'Choco "Chip" Dough - Republican for Vice Ice' },
             { id: 3, name: 'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice' }
         ],
-        type: 'ranked'
+        type: 'ranked',
+        container: 'federal'
     }
 ];
 

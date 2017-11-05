@@ -8,7 +8,8 @@ let ballotsPickTwo = [
             { id: 2, name: 'Cream C. Kol (INDEPENDENT)' },
             { id: 3, name: 'Marsh Mallow (DEMOCRAT)' }
         ],
-        type: 'pick-two'
+        type: 'pick-two',
+        container: 'federal'
     }
 ];
 
