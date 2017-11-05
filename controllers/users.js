@@ -42,7 +42,7 @@ exports.create = (data) => {
 		ballots: {
 			ranked: [],
 			simpleMajority: [],
-			pickTwo: []
+			simple: []
 		}
 	}
 

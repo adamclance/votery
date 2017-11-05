@@ -15,7 +15,7 @@ var records = [
 		ballots: {
 			ranked: [1],
 			simpleMajority: [],
-			pickTwo: []
+			simple: []
 		}
 	},
 	{
@@ -34,7 +34,7 @@ var records = [
 		ballots: {
 			ranked: [1],
 			simpleMajority: [],
-			pickTwo: []
+			simple: []
 		}
 	},
 	{
@@ -53,7 +53,7 @@ var records = [
 		ballots: {
 			ranked: [1],
 			simpleMajority: [],
-			pickTwo: []
+			simple: []
 		}
 	},
 	{
@@ -72,7 +72,7 @@ var records = [
 		ballots: {
 			ranked: [1],
 			simpleMajority: [],
-			pickTwo: []
+			simple: []
 		}
 	},
 	{
@@ -91,7 +91,7 @@ var records = [
 		ballots: {
 			ranked: [],
 			simpleMajority: [],
-			pickTwo: []
+			simple: []
 		}
 	}
 ];

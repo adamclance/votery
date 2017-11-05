@@ -46,6 +46,52 @@
             </div>
         <% } %>
 
+        <!-- Currently running simple ballots -->
+        <% for (var i = 0; i < ballotsSimple.length; i++) { %>
+            <div class="card cell small-12 medium-6">
+                <div class="card-divider">
+                    BALLOT <%= ballotsSimple[i].name %>
+                </div>
+                
+                <div class="card-section">
+                    <%= ballotsSimple[i].description %>
+                </div>
+            
+                <a class="button" href="/vote/simple/<%= ballotsSimple[i].id %>">Vote now</a>  
+            </div>              
+        <% } %>
+
+        <!-- Completed simple -->
+        <% for (var i = 0; i < simpleResults.length; i++) { %>
+            <div class="card cell small-12 medium-6">
+                <div class="card-divider">
+                    RESULTS FOR <%= simpleResults[i].name %>
+                </div>
+                
+                <ul class="ballot-list">
+                    <li class="ballot-list-item">
+                        <span class="ballot-result-candidate">Yes:</span>
+
+                        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= simpleResults[i].scores.yes.percentage %>" aria-valuemin="0" aria-valuetext="<%= simpleResults[i].scores.yes.percentage %> percent" aria-valuemax="100">
+                            <span class="progress-meter" style="width: <%= simpleResults[i].scores.yes.percentage %>%">
+                                <p class="progress-meter-text"><%= simpleResults[i].scores.yes.percentage %>%</p>
+                            </span>
+                        </div>
+                    </li>
+
+                    <li class="ballot-list-item">
+                        <span class="ballot-result-candidate">No:</span>
+
+                        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= simpleResults[i].scores.no.percentage %>" aria-valuemin="0" aria-valuetext="<%= simpleResults[i].scores.no.percentage %> percent" aria-valuemax="100">
+                            <span class="progress-meter" style="width: <%= simpleResults[i].scores.no.percentage %>%">
+                                <p class="progress-meter-text"><%= simpleResults[i].scores.no.percentage %>%</p>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <% } %>
+
         <!-- Currently running pick two ballots -->
         <% for (var i = 0; i < ballotsPickTwo.length; i++) { %>
             <div class="card cell small-12 medium-6">
@@ -54,7 +100,13 @@
                 </div>
                 
                 <div class="card-section">
-                    <%= ballotsPickTwo[i].description %>
+                    <ul class="ballot-list">
+                        <% for (var j = 0; j < ballotsPickTwo[i].options.length; j++) { %>
+                            <li class="ballot-list-item">
+                                <%= ballotsPickTwo[i].options[j].name %>
+                            </li>
+                        <% } %>
+                    </ul>
                 </div>
             
                 <a class="button" href="/vote/pick-two/<%= ballotsPickTwo[i].id %>">Vote now</a>  
@@ -69,25 +121,17 @@
                 </div>
                 
                 <ul class="ballot-list">
-                    <li class="ballot-list-item">
-                        <span class="ballot-result-candidate">Yes:</span>
+                    <% for (var j = 0; j < pickTwoResults[i].scores.length; j++) { %>
+                        <li class="ballot-list-item">
+                            <span class="ballot-result-candidate">Candidate: <%= pickTwoResults[i].scores[j].name %></span>
 
-                        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= pickTwoResults[i].scores.yes.percentage %>" aria-valuemin="0" aria-valuetext="<%= pickTwoResults[i].scores.yes.percentage %> percent" aria-valuemax="100">
-                            <span class="progress-meter" style="width: <%= pickTwoResults[i].scores.yes.percentage %>%">
-                                <p class="progress-meter-text"><%= pickTwoResults[i].scores.yes.percentage %>%</p>
-                            </span>
-                        </div>
-                    </li>
-
-                    <li class="ballot-list-item">
-                        <span class="ballot-result-candidate">No:</span>
-
-                        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= pickTwoResults[i].scores.no.percentage %>" aria-valuemin="0" aria-valuetext="<%= pickTwoResults[i].scores.no.percentage %> percent" aria-valuemax="100">
-                            <span class="progress-meter" style="width: <%= pickTwoResults[i].scores.no.percentage %>%">
-                                <p class="progress-meter-text"><%= pickTwoResults[i].scores.no.percentage %>%</p>
-                            </span>
-                        </div>
-                    </li>
+                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= pickTwoResults[i].scores[j].percentage %>" aria-valuemin="0" aria-valuetext="<%= pickTwoResults[i].scores[j].percentage %> percent" aria-valuemax="100">
+                                <span class="progress-meter" style="width: <%= pickTwoResults[i].scores[j].percentage %>%">
+                                    <p class="progress-meter-text"><%= pickTwoResults[i].scores[j].percentage %>%</p>
+                                </span>
+                            </div>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         <% } %>

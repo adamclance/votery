@@ -5,7 +5,8 @@ const path = require('path');
 
 const users = require('../controllers/users');
 const ballotsRanked = require('../controllers/ballotsRanked');
-const ballotsPickTwo = require('../controllers/ballotsPickTwo');
+const ballotsSimple = require('../controllers/ballotsSimple');
+const ballotsPickTwo = require('../controllers/balotsPickTwo');
 const util = require('../lib/util');
 
 router.get('/', (req, res) => {
@@ -13,9 +14,11 @@ router.get('/', (req, res) => {
 	res.render('index', {
 		user: req.user,
 		rankedResults: ballotsRanked.getAllElectionResults() || [],
+		simpleResults: ballotsSimple.getAllElectionResults() || [],
+		pickTwoResults: ballotsPickTwo.getAllElectionResults() || [],		
 		ballotsRanked: ballotsRanked.ballotsRanked || [],
-		ballotsPickTwo: ballotsPickTwo.ballotsPickTwo || [],
-		pickTwoResults: ballotsPickTwo.getAllElectionResults() || []
+		ballotsSimple: ballotsSimple.ballotsSimple || [],
+		ballotsPickTwo: ballotsPickTwo.ballotsPickTwo || []
 	});
 });
 
