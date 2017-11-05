@@ -11,7 +11,6 @@ module.exports = (router) => {
         const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsRanked.ballotsRankedSubmitted);
     
         res.render('voteRanked', {
-            user: req.user,
             ballot,
             ballotId: req.params.id,
             alreadyVoted
@@ -27,7 +26,6 @@ module.exports = (router) => {
         const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsSimple.ballotsSimpleSubmitted);
     
         res.render('voteSimple', {
-            user: req.user,
             ballot,
             ballotId: req.params.id,
             alreadyVoted
@@ -43,7 +41,6 @@ module.exports = (router) => {
         const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsPickTwo.ballotsPickTwoSubmitted);
     
         res.render('votePickTwo', {
-            user: req.user,
             ballot,
             ballotId: req.params.id,
             alreadyVoted
@@ -56,14 +53,12 @@ module.exports = (router) => {
     
     router.get('/ballots', (req, res) => {
         res.render('ballots', {
-            user: req.user,
             ballots: ballots.getAllBallots()
         });
     });
     
     router.get('/ballots/submitted/:type/:id', (req, res) => {
         res.render('ballotsSubmitted', {
-            user: req.user,
             ballots: ballotsSubmitted.getSubmitted(req)
         });
     });

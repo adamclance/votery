@@ -7,7 +7,6 @@ const ballotsSubmitted = require('../controllers/ballotsSubmitted');
 module.exports = (router) => {
     router.get('/', (req, res) => {
         res.render('index', {
-            user: req.user,
             rankedResults: ballotsRanked.getAllElectionResults() || [],
             simpleResults: ballotsSimple.getAllElectionResults() || [],
             pickTwoResults: ballotsPickTwo.getAllElectionResults() || [],		

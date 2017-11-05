@@ -25,8 +25,6 @@ module.exports = (router) => {
     });
     
     router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
-        res.render('account', {
-            user: req.user
-        });
+        res.render('account');
     });
 }
