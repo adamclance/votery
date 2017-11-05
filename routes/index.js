@@ -5,12 +5,17 @@ const path = require('path');
 
 const users = require('../controllers/users');
 const ballotsRanked = require('../controllers/ballotsRanked');
+const ballotsPickTwo = require('../controllers/ballotsPickTwo');
+const util = require('../lib/util');
 
 router.get('/', (req, res) => {
+	
 	res.render('index', {
 		user: req.user,
 		rankedResults: ballotsRanked.getAllElectionResults() || [],
-		ballotsRanked: ballotsRanked.ballotsRanked || []
+		ballotsRanked: ballotsRanked.ballotsRanked || [],
+		ballotsPickTwo: ballotsPickTwo.ballotsPickTwo || [],
+		pickTwoResults: ballotsPickTwo.getAllElectionResults() || []
 	});
 });
 
@@ -48,14 +53,13 @@ router.post('/register', (req, res) => {
 router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	res.render('account', {
 		user: req.user,
-		ballots: ballotsRanked.getSubmittedByUser(req.user.id)
+		ballots: util.getSubmittedByUser(req.user.id, ballotsRanked.ballotsRankedSubmitted)
 	});
 });
 
-
 router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
-	const ballot = ballotsRanked.getBallotById(req.params.id);
-	const alreadyVoted = !!ballotsRanked.getSubmittedByUser(req.user.id);
+	const ballot = util.getBallotById(req.params.id, ballotsRanked.ballotsRanked);
+	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsRanked.ballotsRankedSubmitted);
 
 	res.render('voteRanked', {
 		user: req.user,

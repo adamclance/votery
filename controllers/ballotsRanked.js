@@ -1,5 +1,6 @@
 const _ = require('underscore');
 const DB = require('../db/ballotsRanked');
+const util = require('../lib/util');
 
 exports.tallyScores = (ballotsSubmitted) => {
     let candidates = [];
@@ -62,14 +63,6 @@ exports.tallyScores = (ballotsSubmitted) => {
     return candidates;
 };
 
-exports.getBallotById = (id) => {
-    return _.findWhere(DB.ballotsRanked, { id: +id });
-};
-
-exports.getSubmittedByUser = (userId) => {
-    return _.filter(DB.ballotsRankedSubmitted, (ballot) => ballot.userId === userId);
-};
-
 exports.getElectionResults = (ballotId) => {
     const ballot = _.findWhere(DB.ballotsRanked, { id: ballotId });
     const ballotsSubmitted = _.filter(DB.ballotsRankedSubmitted, (ballot) => ballot.ballotId === ballotId);
@@ -96,10 +89,6 @@ exports.getAllElectionResults = () => {
     return elections;
 };
 
-exports.checkDuplicates = (userId, ballotId) => {
-    return _.findWhere(DB.ballotsRankedSubmitted, { userId, ballotId });
-}
-
 exports.submitBallot = (data, userId, res) => {
     if (this.checkDuplicates(userId, +data.id)) {
         res.send('You may only vote 1 time.');
@@ -113,6 +102,12 @@ exports.submitBallot = (data, userId, res) => {
 
         res.send('Your ballot has been submitted!');
     }
-}
+} 
+
+exports.checkDuplicates = util.checkDuplicates(ballotsSubmitted = DB.ballotsRankedSubmitted);
+
+exports.getBallotById = util.getBallotById(ballots = DB.ballotsRanked);
+
+exports.getSubmittedByUser = util.getSubmittedByUser(ballotsSubmitted = DB.ballotsRankedSubmitted);
 
 exports.ballotsRanked = DB.ballotsRanked;
