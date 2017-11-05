@@ -1,37 +1,39 @@
 <% layout('layout') -%>
 
-<div class="card account-card">
-        <div class="card-divider">
-            SUBMITTED BALLOTS FOR <%= ballots[0].ballotName %>
-        </div>
-    
-        <table class="hover striped scroll">
-            <thead>
-                <tr>
-                    <th>UUID</th>
-                    <th>Choice(s)</th>
-                    <th>Timestamp</th>
-                </tr>
-            </thead>
-    
-            <tbody>
-                <% for (var i = 0; i < ballots.length; i++) { %>
+<div class="grid-x">
+    <div class="card cell shrink">
+            <div class="card-divider">
+                SUBMITTED BALLOTS FOR <%= ballots[0].ballotName %>
+            </div>
+        
+            <table class="hover striped stack">
+                <thead>
                     <tr>
-                        <td><%= ballots[i].userId %></td>
-                        <td>
-                            <% if (typeof(ballots[i].choices) !== 'undefined') { %>
-                                <ul>
-                                    <% for (var j = 0; j < ballots[i].choices.length; j++) { %>
-                                        <li><%= ballots[i].choices[j] %></li>
-                                    <% } %>
-                                </ul>
-                            <% } else { %>
-                                <%= ballots[i].choice %>
-                            <% } %>
-                        </td>
-                        <td><%= ballots[i].timeStamp %></td>
+                        <th>UUID</th>
+                        <th>Choice(s)</th>
+                        <th>Timestamp</th>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+        
+                <tbody>
+                    <% for (var i = 0; i < ballots.length; i++) { %>
+                        <tr>
+                            <td><%= ballots[i].userId %></td>
+                            <td>
+                                <% if (typeof(ballots[i].choices) !== 'undefined') { %>
+                                    <ul>
+                                        <% for (var j = 0; j < ballots[i].choices.length; j++) { %>
+                                            <li><%= ballots[i].choices[j] %></li>
+                                        <% } %>
+                                    </ul>
+                                <% } else { %>
+                                    <%= ballots[i].choice %>
+                                <% } %>
+                            </td>
+                            <td><%= ballots[i].timeStamp %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+</div>

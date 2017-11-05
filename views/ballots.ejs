@@ -1,11 +1,12 @@
 <% layout('layout') -%>
 
-<div class="card account-card">
+<div class="grid-x">
+    <div class="card cell">
         <div class="card-divider">
             ALL AVAILABLE BALLOTS
         </div>
     
-        <table class="hover striped scroll">
+        <table class="hover striped stack">
             <thead>
                 <tr>
                     <th>Ballot Name</th>
@@ -20,14 +21,27 @@
             <tbody>
                 <% for (var i = 0; i < ballots.length; i++) { %>
                     <tr>
-                        <td><%= ballots[i].name %></td>
-                        <td><%= ballots[i].description %></td>
-                        <td><%= ballots[i].type %></td>
-                        <td><a class="button" href="/vote/<%= ballots[i].type %>/<%= ballots[i].id %>">VOTE</a></td>                        
-                        <td><a class="button" href="/ballots/submitted/<%= ballots[i].type %>/<%= ballots[i].id %>">SUBMITTED</a></td>
-                        <td><a class="button" href="/ballots/results/<%= ballots[i].type %>/<%= ballots[i].id %>">RESULTS</a></td>
+                        <td>
+                            <%= ballots[i].name %>
+                        </td>
+                        <td>
+                            <%= ballots[i].description %>
+                        </td>
+                        <td>
+                            <%= ballots[i].type %>
+                        </td>
+                        <td>
+                            <a class="button" href="/vote/<%= ballots[i].type %>/<%= ballots[i].id %>">VOTE</a>
+                        </td>
+                        <td>
+                            <a class="button" href="/ballots/submitted/<%= ballots[i].type %>/<%= ballots[i].id %>">SUBMITTED</a>
+                        </td>
+                        <td>
+                            <a class="button" href="/ballots/results/<%= ballots[i].type %>/<%= ballots[i].id %>">RESULTS</a>
+                        </td>
                     </tr>
                 <% } %>
             </tbody>
         </table>
     </div>
+</div>
