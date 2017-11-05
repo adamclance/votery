@@ -7,144 +7,32 @@
                 FEDERAL AND STATE
             </div>
         </div>
+
+        <% var container = 'federal' %>
         
         <!-- Currently running ranked ballots -->
-        <% for (var i = 0; i < ballotsRanked.length; i++) { %>
-            <div class="card cell small-12 medium-6">
-                <div class="card-divider">
-                    BALLOT <%= ballotsRanked[i].name %>
-                </div>
-                
-                <div class="card-section">
-                    <ul class="ballot-list">
-                        <% for (var j = 0; j < ballotsRanked[i].options.length; j++) { %>
-                            <li class="ballot-list-item">
-                                <%= ballotsRanked[i].options[j].name %>
-                            </li>
-                        <% } %>
-                    </ul>
-                </div>
-            
-                <a class="button" href="/vote/ranked/<%= ballotsRanked[i].id %>">Vote now</a>  
-            </div>              
-        <% } %>
+        <% var ballots = ballotsRanked %>
+        <%- include partials/ballot.ejs %>
 
         <!-- Completed ranked elections -->
-        <% for (var i = 0; i < rankedResults.length; i++) { %>
-            <div class="card cell small-12 medium-6">
-                <div class="card-divider">
-                    RESULTS FOR <%= rankedResults[i].name %>
-                </div>
-                
-                <ul class="ballot-list">
-                    <% for (var j = 0; j < rankedResults[i].scores.length; j++) { %>
-                        <li class="ballot-list-item">
-                            <span class="ballot-result-candidate">Candidate: <%= rankedResults[i].scores[j].name %></span>
-
-                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= rankedResults[i].scores[j].percentage %>" aria-valuemin="0" aria-valuetext="<%= rankedResults[i].scores[j].percentage %> percent" aria-valuemax="100">
-                                <span class="progress-meter" style="width: <%= rankedResults[i].scores[j].percentage %>%">
-                                    <p class="progress-meter-text"><%= rankedResults[i].scores[j].percentage %>%</p>
-                                </span>
-                            </div>
-                        </li>
-                    <% } %>
-                </ul>
-            </div>
-        <% } %>
+        <% var results = rankedResults %>
+        <%- include partials/ballotCompleted.ejs %>
 
         <!-- Currently running simple ballots -->
-        <% for (var i = 0; i < ballotsSimple.length; i++) { %>
-            <% if (ballotsSimple[i].container !== 'county') { %>
-                <div class="card cell small-12 medium-6">
-                    <div class="card-divider">
-                        BALLOT <%= ballotsSimple[i].name %>
-                    </div>
-                    
-                    <div class="card-section">
-                        <%= ballotsSimple[i].description %>
-                    </div>
-                
-                    <a class="button" href="/vote/simple/<%= ballotsSimple[i].id %>">Vote now</a>  
-                </div>
-            <% } %>              
-        <% } %>
+        <% var ballots = ballotsSimple %>
+        <%- include partials/simpleBallot.ejs %>
 
         <!-- Completed simple -->
-        <% for (var i = 0; i < simpleResults.length; i++) { %>
-            <% if (simpleResults[i].container !== 'county') { %>
-                <div class="card cell small-12 medium-6">
-                    <div class="card-divider">
-                        RESULTS FOR <%= simpleResults[i].name %>
-                    </div>
-                    
-                    <ul class="ballot-list">
-                        <li class="ballot-list-item">
-                            <span class="ballot-result-candidate">Yes:</span>
-
-                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= simpleResults[i].scores.yes.percentage %>" aria-valuemin="0" aria-valuetext="<%= simpleResults[i].scores.yes.percentage %> percent" aria-valuemax="100">
-                                <span class="progress-meter" style="width: <%= simpleResults[i].scores.yes.percentage %>%">
-                                    <p class="progress-meter-text"><%= simpleResults[i].scores.yes.percentage %>%</p>
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="ballot-list-item">
-                            <span class="ballot-result-candidate">No:</span>
-
-                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= simpleResults[i].scores.no.percentage %>" aria-valuemin="0" aria-valuetext="<%= simpleResults[i].scores.no.percentage %> percent" aria-valuemax="100">
-                                <span class="progress-meter" style="width: <%= simpleResults[i].scores.no.percentage %>%">
-                                    <p class="progress-meter-text"><%= simpleResults[i].scores.no.percentage %>%</p>
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            <% } %>
-        <% } %>
+        <% var results = simpleResults %>
+        <%- include partials/simpleBallotCompleted.ejs %>
 
         <!-- Currently running pick two ballots -->
-        <% for (var i = 0; i < ballotsPickTwo.length; i++) { %>
-            <div class="card cell small-12 medium-6">
-                <div class="card-divider">
-                    BALLOT <%= ballotsPickTwo[i].name %>
-                </div>
-                
-                <div class="card-section">
-                    <ul class="ballot-list">
-                        <% for (var j = 0; j < ballotsPickTwo[i].options.length; j++) { %>
-                            <li class="ballot-list-item">
-                                <%= ballotsPickTwo[i].options[j].name %>
-                            </li>
-                        <% } %>
-                    </ul>
-                </div>
-            
-                <a class="button" href="/vote/pick-two/<%= ballotsPickTwo[i].id %>">Vote now</a>  
-            </div>              
-        <% } %>
+        <% var ballots = ballotsPickTwo %>
+        <%- include partials/ballot.ejs %>
 
         <!-- Completed pick two -->
-        <% for (var i = 0; i < pickTwoResults.length; i++) { %>
-            <div class="card cell small-12 medium-6">
-                <div class="card-divider">
-                    RESULTS FOR <%= pickTwoResults[i].name %>
-                </div>
-                
-                <ul class="ballot-list">
-                    <% for (var j = 0; j < pickTwoResults[i].scores.length; j++) { %>
-                        <li class="ballot-list-item">
-                            <span class="ballot-result-candidate">Candidate: <%= pickTwoResults[i].scores[j].name %></span>
-
-                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= pickTwoResults[i].scores[j].percentage %>" aria-valuemin="0" aria-valuetext="<%= pickTwoResults[i].scores[j].percentage %> percent" aria-valuemax="100">
-                                <span class="progress-meter" style="width: <%= pickTwoResults[i].scores[j].percentage %>%">
-                                    <p class="progress-meter-text"><%= pickTwoResults[i].scores[j].percentage %>%</p>
-                                </span>
-                            </div>
-                        </li>
-                    <% } %>
-                </ul>
-            </div>
-        <% } %>
+        <% var results = pickTwoResults %>
+        <%- include partials/ballotCompleted.ejs %>
 
         <div class="card small-12 cell">
             <div class="card-divider">
@@ -152,54 +40,14 @@
             </div>
         </div>
 
+        <% var container = 'county' %>
+
         <!-- Currently running simple ballots -->
-        <% for (var i = 0; i < ballotsSimple.length; i++) { %>
-            <% if (ballotsSimple[i].container === 'county') { %>
-                <div class="card cell small-12 medium-6">
-                    <div class="card-divider">
-                        BALLOT <%= ballotsSimple[i].name %>
-                    </div>
-                    
-                    <div class="card-section">
-                        <%= ballotsSimple[i].description %>
-                    </div>
-                
-                    <a class="button" href="/vote/simple/<%= ballotsSimple[i].id %>">Vote now</a>  
-                </div>
-            <% } %>              
-        <% } %>
+        <% var ballots = ballotsSimple %>
+        <%- include partials/simpleBallot.ejs %>
 
         <!-- Completed simple -->
-        <% for (var i = 0; i < simpleResults.length; i++) { %>
-            <% if (simpleResults[i].container === 'county') { %>
-                <div class="card cell small-12 medium-6">
-                    <div class="card-divider">
-                        RESULTS FOR <%= simpleResults[i].name %>
-                    </div>
-                    
-                    <ul class="ballot-list">
-                        <li class="ballot-list-item">
-                            <span class="ballot-result-candidate">Yes:</span>
-
-                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= simpleResults[i].scores.yes.percentage %>" aria-valuemin="0" aria-valuetext="<%= simpleResults[i].scores.yes.percentage %> percent" aria-valuemax="100">
-                                <span class="progress-meter" style="width: <%= simpleResults[i].scores.yes.percentage %>%">
-                                    <p class="progress-meter-text"><%= simpleResults[i].scores.yes.percentage %>%</p>
-                                </span>
-                            </div>
-                        </li>
-
-                        <li class="ballot-list-item">
-                            <span class="ballot-result-candidate">No:</span>
-
-                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= simpleResults[i].scores.no.percentage %>" aria-valuemin="0" aria-valuetext="<%= simpleResults[i].scores.no.percentage %> percent" aria-valuemax="100">
-                                <span class="progress-meter" style="width: <%= simpleResults[i].scores.no.percentage %>%">
-                                    <p class="progress-meter-text"><%= simpleResults[i].scores.no.percentage %>%</p>
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            <% } %>
-        <% } %>
+        <% var results = simpleResults %>
+        <%- include partials/simpleBallotCompleted.ejs %>
     </div>
 </div>

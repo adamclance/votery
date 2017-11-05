@@ -38,7 +38,7 @@ exports.getElectionResults = (ballotId) => {
 
     _.each(scores, (score) => score.percentage = Math.round(score.votes / totalVotes * 100));
 
-    return { name, scores, totalVotes };
+    return { name, scores, totalVotes, container: ballot.container };
 };
 
 exports.getAllElectionResults = () => {

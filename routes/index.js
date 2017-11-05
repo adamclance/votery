@@ -54,7 +54,7 @@ router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=t
 
 router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	const ballot = util.getBallotById(req.params.id, ballotsRanked.ballotsRanked);
-	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsRanked.ballotsRankedSubmitted).length;
+	const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsRanked.ballotsRankedSubmitted);
 
 	res.render('voteRanked', {
 		user: req.user,
@@ -70,7 +70,7 @@ router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?lo
 
 router.get('/vote/simple/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	const ballot = util.getBallotById(req.params.id, ballotsSimple.ballotsSimple);
-	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsSimple.ballotsSimpleSubmitted).length;
+	const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsSimple.ballotsSimpleSubmitted);
 
 	res.render('voteSimple', {
 		user: req.user,
@@ -86,7 +86,7 @@ router.post('/vote/simple', require('connect-ensure-login').ensureLoggedIn('/?lo
 
 router.get('/vote/pick-two/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	const ballot = util.getBallotById(req.params.id, ballotsPickTwo.ballotsPickTwo);
-	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsPickTwo.ballotsPickTwoSubmitted).length;
+	const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsPickTwo.ballotsPickTwoSubmitted);
 
 	res.render('votePickTwo', {
 		user: req.user,
