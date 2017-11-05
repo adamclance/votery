@@ -1,0 +1,22 @@
+<!-- Currently running ranked ballots -->
+<% for (var i = 0; i < ballots.length; i++) { %>
+    <% if (ballots[i].container === container) { %>
+        <div class="card cell small-12 medium-6">
+            <div class="card-divider">
+                BALLOT <%= ballots[i].name %>
+            </div>
+            
+            <div class="card-section">
+                <ul class="ballot-list">
+                    <% for (var j = 0; j < ballots[i].options.length; j++) { %>
+                        <li class="ballot-list-item">
+                            <%= ballots[i].options[j].name %>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        
+            <a class="button" href="/vote/<%= ballots[i].type %>/<%= ballots[i].id %>">Vote now</a>  
+        </div> 
+    <% } %>             
+<% } %>

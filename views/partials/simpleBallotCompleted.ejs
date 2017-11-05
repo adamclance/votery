@@ -1,0 +1,31 @@
+<% for (var i = 0; i < results.length; i++) { %>
+    <% if (results[i].container === container) { %>
+        <div class="card cell small-12 medium-6">
+            <div class="card-divider">
+                RESULTS FOR <%= results[i].name %>
+            </div>
+            
+            <ul class="ballot-list">
+                <li class="ballot-list-item">
+                    <span class="ballot-result-candidate">Yes:</span>
+
+                    <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= results[i].scores.yes.percentage %>" aria-valuemin="0" aria-valuetext="<%= results[i].scores.yes.percentage %> percent" aria-valuemax="100">
+                        <span class="progress-meter" style="width: <%= results[i].scores.yes.percentage %>%">
+                            <p class="progress-meter-text"><%= results[i].scores.yes.percentage %>%</p>
+                        </span>
+                    </div>
+                </li>
+
+                <li class="ballot-list-item">
+                    <span class="ballot-result-candidate">No:</span>
+
+                    <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= results[i].scores.no.percentage %>" aria-valuemin="0" aria-valuetext="<%= results[i].scores.no.percentage %> percent" aria-valuemax="100">
+                        <span class="progress-meter" style="width: <%= results[i].scores.no.percentage %>%">
+                            <p class="progress-meter-text"><%= results[i].scores.no.percentage %>%</p>
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    <% } %>
+<% } %>

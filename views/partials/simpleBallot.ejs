@@ -1,0 +1,15 @@
+<% for (var i = 0; i < ballots.length; i++) { %>
+    <% if (ballots[i].container === container) { %>
+        <div class="card cell small-12 medium-6">
+            <div class="card-divider">
+                BALLOT <%= ballots[i].name %>
+            </div>
+            
+            <div class="card-section">
+                <%= ballots[i].description %>
+            </div>
+        
+            <a class="button" href="/vote/simple/<%= ballots[i].id %>">Vote now</a>  
+        </div>
+    <% } %>              
+<% } %>
