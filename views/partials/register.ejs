@@ -1,41 +1,47 @@
 <div class="reveal" id="registerModal" data-reveal>
     <h1>Register</h1>
-    <form method="POST" action="/register">
+    <form method="POST" action="/register" data-abide novalidate>
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
                 <div class="small-12 cell">
                     <label>Username
-                        <input name="username" type="text" placeholder="Username">
+                        <input name="username" type="text" placeholder="Username" required pattern="alpha_numeric">
+                        <span class="form-error">Username is required and must contain letters.</span>                                                 
                     </label>
                 </div>
 
                 <div class="small-12 cell">
                     <label>Email
-                        <input name="email" type="email" placeholder="email@example.com">
+                        <input name="email" type="email" placeholder="email@example.com" required pattern="email">
+                        <span class="form-error">Email is required.</span>
                     </label>
                 </div>
 
                 <div class="small-12 cell">
                     <label>Password
-                        <input name="password" type="password" placeholder="Password">
+                        <input id="password" name="password" type="password" placeholder="Password" required>
+                        <span class="form-error">Password is required.</span>
                     </label>
                 </div>
 
                 <div class="small-12 cell">
                     <label>Confirm Password
-                        <input name="password-confirm" type="password" placeholder="Password">
+                        <input name="password-confirm" type="password" placeholder="Password" required data-equalto="password">
+                        <span class="form-error">Passwords must match.</span>
                     </label>
                 </div>
 
                 <div class="small-12 cell">
                     <label>First name
-                        <input name="firstName" type="text" placeholder="First Name">
+                        <input name="firstName" type="text" placeholder="First Name" required>
+                        <span class="form-error">First name is required.</span>
                     </label>
                 </div>
 
                 <div class="small-12 cell">
                     <label>Last name
-                        <input name="lastName" type="text" placeholder="Last Name">
+                        <input name="lastName" type="text" placeholder="Last Name" required>
+                        <span class="form-error">Last name is required.</span>
                     </label>
                 </div>
 
@@ -99,17 +105,21 @@
 
                 <div class="small-12 cell">
                     <label>City
-                        <input name="city" type="text" placeholder="City">
+                        <input name="city" type="text" placeholder="City" required>
+                        <span class="form-error">City is required.</span>
                     </label>
                 </div>
 
                 <div class="small-12 cell">
                     <label>Zipcode
-                        <input name="zip" type="number" placeholder="12345">
+                        <input name="zip" type="number" placeholder="12345" required pattern="integer">
+                        <span class="form-error">Zip code is required.</span>
                     </label>
                 </div>
 
-                <input type="submit" class="button expanded" value="Register">
+                <div class="small-12 cell">
+                    <input type="submit" class="button expanded" value="Register">                    
+                </div>
             </div>
         </div>
     </form>

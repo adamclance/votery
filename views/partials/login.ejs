@@ -1,20 +1,24 @@
 <div class="reveal" id="loginModal" data-reveal>
     <h1>Login</h1>
-    <form method="POST" action="/login">
+    <form method="POST" action="/login" data-abide novalidate>
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
                 <div class="small-12 cell">
                     <label>Username
-                        <input name="username" type="text" placeholder="Username">
+                        <input name="username" type="text" placeholder="Username" required pattern="alpha_numeric">
+                        <span class="form-error">Username is required and must contain letters.</span>                         
                     </label>
                 </div>
                 <div class="small-12 cell">
                     <label>Password
-                        <input name="password" type="password" placeholder="Password">
+                        <input name="password" type="password" placeholder="Password" required>
+                        <span class="form-error">Password is required.</span>                                             
                     </label>
                 </div>
 
-                <input type="submit" class="button expanded" value="Login">                
+                <div class="small-12 cell">
+                    <input type="submit" class="button expanded" value="Login">                                    
+                </div>
             </div>
         </div>
     </form>

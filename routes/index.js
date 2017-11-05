@@ -23,15 +23,7 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.get('/login', (req, res) => {
-	if (req.user) {
-		res.redirect('/');
-	} else {
-		res.render('login', { user: req.user });
-	}
-});
-
-router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), (req, res) => {
+router.post('/login', passport.authenticate('local', { failureRedirect: '/?loginFailed=true' }), (req, res) => {
 	res.redirect('/');
 });
 

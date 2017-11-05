@@ -7,6 +7,10 @@ import votePickTwoPage from './votePickTwo';
 
 $(document).ready(function() {
     $(document).foundation();
+    let abide = new Foundation.Abide($('form[data-abide]'), {
+        'data-live-validate': false,
+        'data-validate-on-blur': true
+    });
 });
 
 // Helper function to get query params
