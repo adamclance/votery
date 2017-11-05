@@ -1,11 +1,15 @@
 <div class="reveal" id="registerModal" data-reveal>
     <h1>Register</h1>
-    <form method="POST" action="/register" data-abide novalidate>
+    <form class="register-form" method="POST" action="/register" data-abide novalidate>
+        <div data-abide-error class="alert callout" style="display: none;">
+            <p><i class="fi-alert"></i> There are some errors in your form.</p>
+        </div>
+
         <div class="grid-container">
             <div class="grid-x grid-padding-x">
                 <div class="small-12 cell">
                     <label>Username
-                        <input name="username" type="text" placeholder="Username" required pattern="alpha_numeric">
+                        <input name="username" type="text" placeholder="Username" required pattern="alpha">
                         <span class="form-error">Username is required and must contain letters.</span>                                                 
                     </label>
                 </div>

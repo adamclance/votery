@@ -7,7 +7,17 @@ import votePickTwoPage from './votePickTwo';
 
 $(document).ready(function() {
     $(document).foundation();
-    let abide = new Foundation.Abide($('form[data-abide]'), {
+});
+
+$(document).on('open.fndtn.reveal', '#loginModal', function () {
+    new Foundation.Abide($('form.login-form'), {
+        'data-live-validate': false,
+        'data-validate-on-blur': true
+    });
+});
+
+$(document).on('open.fndtn.reveal', '#registerModal', function () {
+    new Foundation.Abide($('form.register-form'), {
         'data-live-validate': false,
         'data-validate-on-blur': true
     });
