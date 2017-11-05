@@ -52,7 +52,7 @@ exports.getAllElectionResults = () => {
 };
 
 exports.submitBallot = (data, userId, res) => {
-    if (this.checkDuplicates(userId, +data.id)) {
+    if (util.checkDuplicates(userId, +data.id, DB.ballotsPickTwoSubmitted)) {
         res.send('You may only vote 1 time.');
     } else {
         DB.ballotsPickTwoSubmitted.push({
@@ -73,3 +73,5 @@ exports.getBallotById = util.getBallotById(ballots = DB.ballotsPickTwo);
 exports.getSubmittedByUser = util.getSubmittedByUser(ballotsSubmitted = DB.ballotsPickTwoSubmitted);
 
 exports.ballotsPickTwo = DB.ballotsPickTwo;
+
+exports.ballotsPickTwoSubmitted = DB.ballotsPickTwoSubmitted;

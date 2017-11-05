@@ -14,8 +14,8 @@ var records = [
 		},
 		ballots: {
 			ranked: [1],
-			simpleMajority: [],
-			simple: []
+			simple: [1],
+			pickTwo: [1]
 		}
 	},
 	{
@@ -33,8 +33,8 @@ var records = [
 		},
 		ballots: {
 			ranked: [1],
-			simpleMajority: [],
-			simple: []
+			simple: [1],
+			pickTwo: [1]
 		}
 	},
 	{
@@ -52,8 +52,8 @@ var records = [
 		},
 		ballots: {
 			ranked: [1],
-			simpleMajority: [],
-			simple: []
+			simple: [1],
+			pickTwo: [1]
 		}
 	},
 	{
@@ -71,6 +71,25 @@ var records = [
 		},
 		ballots: {
 			ranked: [1],
+			simple: [1],
+			pickTwo: [1]
+		}
+	},
+	{
+		id: 'd06076ab-4241-495d-8311-1a1275958744',
+		role: 'user',
+		username: 'test',
+		password: 'test',
+		firstName: 'Test',
+		lastName: 'Test',
+		email: 'test@example.com',
+		residence: {
+			state: 'OH',
+			city: 'Cleveland',
+			zip: '44105'
+		},
+		ballots: {
+			ranked: [],
 			simpleMajority: [],
 			simple: []
 		}

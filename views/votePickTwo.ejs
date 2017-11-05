@@ -1,0 +1,38 @@
+<% layout('layout') -%>
+
+<% var disabledClass = '' %>
+
+<% if (alreadyVoted) { %>
+    <% disabledClass = 'disabled' %>
+    <div class="callout alert">
+        <h5>You already casted your vote for this ballot!</h5>
+        <a href="/">Go back home.</a>
+    </div>
+<% } %>
+
+<div class="card">
+    <div class="card-divider">
+        <%= ballot.name %>
+    </div>
+
+    <div class="card-section">
+        <fieldset class="small-12 cell pick-two-choices" data-ballot-id="<%= ballot.id %>">
+                <legend><%= ballot.description %></legend>
+                <% for (var i = 0; i < ballot.options.length; i++) { %>
+                    <input data-name="<%= ballot.options[i].name %>" class="ballot-checkbox" id="<%= ballot.options[i].id %>" type="checkbox">
+                    <label for="<%= ballot.options[i].id %>"><%= ballot.options[i].name %></label>
+                <% } %>
+        </fieldset>
+    </div>
+
+    <div class="card-section input-group">
+        <input class="candidate-add-input input-group-field" placeholder="Write in candidate" type="text" />
+        <div class="input-group-button">
+            <a class="candidate-add-button button <%= disabledClass %>">Add</a>
+        </div>
+    </div>
+
+    <div class="card-section">
+        <a class="pick-two-ballot-submit button expanded  <%= disabledClass %>">SUBMIT BALLOT</a>
+    </div>
+</div>

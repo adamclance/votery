@@ -6,7 +6,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 module.exports = {
     entry: { main: ['./public/js/app.js', './sass/app.scss'] },
     output: {
-        filename: './public/js/dist/bundle.min.js'
+        filename: './public/js/dist/bundle.min.js',
+        sourceMapFilename: './public/js/dist/bundle.min.js.map'
     },
     devtool: 'source-map',
     module: {
@@ -43,6 +44,6 @@ module.exports = {
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
         }),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin({ sourceMap: true })
     ]
 }

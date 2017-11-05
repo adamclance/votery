@@ -58,3 +58,5 @@ exports.getBallotById = util.getBallotById(ballots = DB.ballotsSimple);
 exports.getSubmittedByUser = util.getSubmittedByUser(ballotsSubmitted = DB.ballotsSimpleSubmitted);
 
 exports.ballotsSimple = DB.ballotsSimple;
+
+exports.ballotsSimpleSubmitted = DB.ballotsSimpleSubmitted;

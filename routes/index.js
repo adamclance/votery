@@ -62,7 +62,7 @@ router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=t
 
 router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	const ballot = util.getBallotById(req.params.id, ballotsRanked.ballotsRanked);
-	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsRanked.ballotsRankedSubmitted);
+	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsRanked.ballotsRankedSubmitted).length;
 
 	res.render('voteRanked', {
 		user: req.user,
@@ -74,6 +74,38 @@ router.get('/vote/ranked/:id', require('connect-ensure-login').ensureLoggedIn('/
 
 router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
 	ballotsRanked.submitBallot(req.body, req.user.id, res);
+});
+
+router.get('/vote/simple/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
+	const ballot = util.getBallotById(req.params.id, ballotsSimple.ballotsSimple);
+	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsSimple.ballotsSimpleSubmitted).length;
+
+	res.render('voteSimple', {
+		user: req.user,
+		ballot,
+		ballotId: req.params.id,
+		alreadyVoted
+	});
+});
+
+router.post('/vote/simple', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
+	ballotsSimple.submitBallot(req.body, req.user.id, res);
+});
+
+router.get('/vote/pick-two/:id', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
+	const ballot = util.getBallotById(req.params.id, ballotsPickTwo.ballotsPickTwo);
+	const alreadyVoted = !!util.getSubmittedByUser(req.user.id, ballotsPickTwo.ballotsPickTwoSubmitted).length;
+
+	res.render('votePickTwo', {
+		user: req.user,
+		ballot,
+		ballotId: req.params.id,
+		alreadyVoted
+	});
+});
+
+router.post('/vote/pick-two', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
+	ballotsPickTwo.submitBallot(req.body, req.user.id, res);
 });
 
 module.exports = router;

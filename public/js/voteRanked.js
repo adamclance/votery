@@ -30,7 +30,7 @@ export default class voteRankedPage {
 
     submitBallot() {
         if (!this.$submitButton.hasClass('disabled')) {
-            const choices = $('.rankedBallotSort li').map(function () { return $(this).text(); }).toArray();
+            const choices = $('.rankedBallotSort li').map(function () { return $(this).text(); }).get();
 
             $.post('/vote/ranked', { id: $('.rankedBallotSort').data('ballot-id'), choices: choices })
                 .done((resp) => {

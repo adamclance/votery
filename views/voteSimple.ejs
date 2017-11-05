@@ -1,0 +1,33 @@
+<% layout('layout') -%>
+
+<% var disabledClass = '' %>
+
+<% if (alreadyVoted) { %>
+    <% disabledClass = 'disabled' %>
+    <div class="callout alert">
+        <h5>You already casted your vote for this ballot!</h5>
+        <a href="/">Go back home.</a>
+    </div>
+<% } %>
+
+<div class="card">
+    <div class="card-divider">
+        <%= ballot.name %>
+    </div>
+
+    <div class="card-section">
+        <fieldset class="large-6 cell">
+            <legend>
+                <%= ballot.description %>
+            </legend>
+            <input type="radio" name="voteSimple" value="yes" id="yes" required>
+            <label for="yes">YES</label>
+            <input type="radio" name="voteSimple" value="no" id="no">
+            <label for="no">NO</label>
+        </fieldset>
+    </div>
+
+    <div class="card-section">
+        <a class="simple-ballot-submit button expanded  <%= disabledClass %>">SUBMIT BALLOT</a>
+    </div>
+</div>
