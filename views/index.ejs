@@ -43,11 +43,28 @@
         <% var container = 'county' %>
 
         <!-- Currently running simple ballots -->
+        <!-- Currently running ranked ballots -->
+        <% var ballots = ballotsRanked %>
+        <%- include partials/ballot.ejs %>
+
+        <!-- Completed ranked elections -->
+        <% var results = rankedResults %>
+        <%- include partials/ballotCompleted.ejs %>
+
+        <!-- Currently running simple ballots -->
         <% var ballots = ballotsSimple %>
         <%- include partials/simpleBallot.ejs %>
 
         <!-- Completed simple -->
         <% var results = simpleResults %>
         <%- include partials/simpleBallotCompleted.ejs %>
+
+        <!-- Currently running pick two ballots -->
+        <% var ballots = ballotsPickTwo %>
+        <%- include partials/ballot.ejs %>
+
+        <!-- Completed pick two -->
+        <% var results = pickTwoResults %>
+        <%- include partials/ballotCompleted.ejs %>
     </div>
 </div>

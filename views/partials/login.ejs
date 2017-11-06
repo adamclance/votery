@@ -1,6 +1,12 @@
 <div class="reveal" id="loginModal" data-reveal>
     <h1>Login</h1>
     <form class="login-form" method="POST" action="/login" data-abide novalidate>
+        <% if (loginFailed) { %>
+            <div class="callout alert">
+                <h5>Invalid username or password. Please try again.</h5>
+            </div>
+        <% } %>
+
         <div data-abide-error class="alert callout" style="display: none;">
             <p><i class="fi-alert"></i> There are some errors in your form.</p>
         </div>

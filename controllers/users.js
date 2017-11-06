@@ -2,7 +2,7 @@ const DB = require('../db/users');
 const uuid = require('uuid/v4');
 const _ = require('underscore');
 
-exports.findById = function (id, cb) {
+exports.findById = (id, cb) => {
 	const user = _.findWhere(DB.userData, {id});
 	
 	process.nextTick(function () {
@@ -14,8 +14,8 @@ exports.findById = function (id, cb) {
 	});
 }
 
-exports.findByUsername = function (username, cb) {
-	process.nextTick(function () {
+exports.findByUsername = (username, cb) => {
+	process.nextTick(() => {
 		for (var i = 0, len = DB.userData.length; i < len; i++) {
 			var record = DB.userData[i];
 			if (record.username === username) {
@@ -24,6 +24,11 @@ exports.findByUsername = function (username, cb) {
 		}
 		return cb(null, null);
 	});
+}
+
+exports.getRoleById = (id) => {
+	const user = _.findWhere(DB.userData, {id});
+	return user.role;
 }
 
 exports.create = (data) => {

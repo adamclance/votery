@@ -1,0 +1,61 @@
+<% layout('layout') -%>
+
+<div class="grid-x">
+    <h1>Edit ballot</h1>
+
+    <form class="edit-ballot-form" method="POST" action="/ballots/edit" data-abide novalidate>
+        <div data-abide-error class="alert callout" style="display: none;">
+            <p><i class="fi-alert"></i> There are some errors in your form.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 cell">
+                    <label>ID
+                        <input name="id" type="text" value="<%= ballot.id %>" required disabled>                       
+                    </label>
+                </div>
+
+                <div class="small-12 cell">
+                    <label>Name
+                        <input name="name" type="text" value="<%= ballot.name %>" required>
+                        <span class="form-error">Name is required.</span>                                             
+                    </label>
+                </div>
+
+                <div class="small-12 cell">
+                    <label>Description
+                        <textarea name="description" required><%= ballot.description %></textarea>
+                        <span class="form-error">Description is required.</span>                                             
+                    </label>
+                </div>                                
+                
+                <div class="small-12 cell">
+                    <label>Type
+                        <select name="type">
+                            <% if (ballot.type === 'ranked' || ballot.type === 'pick-two') { %>
+                                <option value="ranked" <% if (ballot.type === 'ranked') { %>selected="selected"<% } %>>Ranked</option>
+                                <option value="pick-two" <% if (ballot.type === 'pick-two') { %>selected="selected"<% } %>>Pick Two</option>  
+                            <% } else { %>
+                                <option value="simple" <% if (ballot.type === 'simple') { %>selected="selected"<% } %>>Simple</option>                                
+                            <% } %>
+                        </select>                                             
+                    </label>
+                </div>
+
+                <div class="small-12 cell">
+                    <label>Container
+                        <select name="container">
+                            <option value="federal" <% if (ballot.container === 'federal') { %>selected="selected"<% } %>>Federal</option>
+                            <option value="county" <% if (ballot.container === 'county') { %>selected="selected"<% } %>>County</option>
+                        </select>                                             
+                    </label>
+                </div>
+
+                <div class="small-12 cell">
+                    <input type="submit" class="button expanded" value="UPDATE BALLOT">                                    
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

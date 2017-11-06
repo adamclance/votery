@@ -31,7 +31,7 @@ const getParameterByName = (name) => {
 
 window.onload = () => {
     // Open login modal if query param present
-    if (getParameterByName('login')) {
+    if (getParameterByName('login') || getParameterByName('loginFailed')) {
         var modal = new Foundation.Reveal($('#loginModal'));
         modal.open();
     };
