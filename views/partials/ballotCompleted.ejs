@@ -2,7 +2,7 @@
     <% if (results[i].container === container) { %>
         <div class="card cell small-12 medium-6">
             <div class="card-divider">
-                RESULTS FOR <%= results[i].name %>
+                RESULTS FOR <%= results[i].name %> <% if (ballots[i].closed) { %>(CLOSED)<% } %>
             </div>
             
             <ul class="ballot-list">

@@ -9,7 +9,8 @@ let ballotsPickTwo = [
             { id: 3, name: 'Marsh Mallow (DEMOCRAT)' }
         ],
         type: 'pick-two',
-        container: 'federal'
+        container: 'federal',
+        closed: false
     }
 ];
 

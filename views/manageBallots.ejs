@@ -34,7 +34,11 @@
                             <a class="button" href="/ballots/edit/<%= ballots[i].type %>/<%= ballots[i].id %>">EDIT</a>
                         </td>
                         <td>
-                            <a class="button" href="/ballots/close/<%= ballots[i].type %>/<%= ballots[i].id %>">CLOSE</a>
+                            <% if (ballots[i].closed) { %>
+                                <a class="button" href="/ballots/open/<%= ballots[i].type %>/<%= ballots[i].id %>">OPEN</a>                                
+                            <% } else { %>
+                                <a class="button" href="/ballots/close/<%= ballots[i].type %>/<%= ballots[i].id %>">CLOSE</a>                                
+                            <% } %>
                         </td>
                         <td>
                             <a class="button" href="/ballots/delete/<%= ballots[i].type %>/<%= ballots[i].id %>">DELETE</a>

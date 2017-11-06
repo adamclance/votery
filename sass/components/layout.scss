@@ -10,3 +10,7 @@
 .button {
     border-radius: 5px;
 }
+
+a[disabled] {
+    pointer-events: none;
+}

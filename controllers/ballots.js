@@ -19,7 +19,7 @@ exports.getAllBallots = () => ballotsRanked.ballotsRanked.concat(ballotsPickTwo.
 
 exports.getBallot = (type, id) => {
     const ballots = map[type];
-    return _.findWhere(ballots, (ballot) => ballot.id === +id);
+    return _.findWhere(ballots, {id: +id});
 };
 
 exports.updateBallot = (type, id, data) => {
@@ -42,4 +42,14 @@ exports.deleteBallot = (type, id) => {
             mapSubmitted[type].splice(index, 1);
         }
     });
-}
+};
+
+exports.closeBallot = (type, id) => {
+    let ballot = this.getBallot(type, +id);
+    ballot.closed = true;
+};
+
+exports.openBallot = (type, id) => {
+    let ballot = this.getBallot(type, +id);
+    ballot.closed = false;
+};

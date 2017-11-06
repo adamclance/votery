@@ -4,14 +4,16 @@ let ballotsSimple = [
         name: 'FOR CHIEF DAIRY QUEEN UNEXPIRED TERM',
         description: 'Shall Justice Mint C. Chip of the Supreme Court of the state of Ice Cream be retained in office for another tem?',
         type: 'simple',
-        container: 'federal'
+        container: 'federal',
+        closed: false
     },
     {
         id: 2,
         name: 'CONSTITUTIONAL INITIATIVE NO. 116 MAKE VANILLA (OVER CHOCOLATE) THE OFFICIAL BEST FLAVOR',
         description: 'This is a fiercly debated topic and C1 - 116 would official enumerate in written legislative text in perpetuity which flavor has favor - namely vanilla is better, unequivocally, than chocolate.',
         type: 'simple',
-        container: 'county'
+        container: 'county',
+        closed: false
     }
 ];
 

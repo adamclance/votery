@@ -2,14 +2,14 @@
     <% if (ballots[i].container === container) { %>
         <div class="card cell small-12 medium-6">
             <div class="card-divider">
-                BALLOT <%= ballots[i].name %>
+                BALLOT <%= ballots[i].name %> <% if (ballots[i].closed) { %>(CLOSED)<% } %>
             </div>
             
             <div class="card-section">
                 <%= ballots[i].description %>
             </div>
         
-            <a class="button" href="/vote/simple/<%= ballots[i].id %>">Vote now</a>  
+            <a class="button" <% if (ballots[i].closed) { %>disabled<% } %> href="/vote/simple/<%= ballots[i].id %>">Vote now</a>  
         </div>
     <% } %>              
 <% } %>

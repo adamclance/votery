@@ -43,4 +43,14 @@ module.exports = (router) => {
         ballots.deleteBallot(req.params.type, req.params.id);
         res.redirect(`/ballots/manage`);
     });
+
+    router.get('/ballots/close/:type/:id', (req, res) => {
+        ballots.closeBallot(req.params.type, req.params.id);
+        res.redirect(`/ballots/manage`);
+    });
+
+    router.get('/ballots/open/:type/:id', (req, res) => {
+        ballots.openBallot(req.params.type, req.params.id);
+        res.redirect(`/ballots/manage`);
+    });
 }

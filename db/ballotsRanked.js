@@ -9,7 +9,8 @@ let ballotsRanked = [
             { id: 3, name: 'Magic Browny - Independent for C.I.C Phish Food - Independent for Vice Ice' }
         ],
         type: 'ranked',
-        container: 'federal'
+        container: 'federal',
+        closed: false
     }
 ];
 
