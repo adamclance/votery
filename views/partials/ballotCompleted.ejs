@@ -6,16 +6,20 @@
             </div>
             
             <ul class="ballot-list">
-                <% for (var j = 0; j < results[i].scores.length; j++) { %>
-                    <li class="ballot-list-item">
-                        <span class="ballot-result-candidate">Candidate: <%= results[i].scores[j].name %></span>
+                <% if (results[i].scores.length) { %>
+                    <% for (var j = 0; j < results[i].scores.length; j++) { %>
+                        <li class="ballot-list-item">
+                            <span class="ballot-result-candidate">Candidate: <%= results[i].scores[j].name %></span>
 
-                        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= results[i].scores[j].percentage %>" aria-valuemin="0" aria-valuetext="<%= results[i].scores[j].percentage %> percent" aria-valuemax="100">
-                            <span class="progress-meter" style="width: <%= results[i].scores[j].percentage %>%">
-                                <p class="progress-meter-text"><%= results[i].scores[j].percentage %>%</p>
-                            </span>
-                        </div>
-                    </li>
+                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= results[i].scores[j].percentage || 0 %>" aria-valuemin="0" aria-valuetext="<%= results[i].scores[j].percentage %> percent" aria-valuemax="100">
+                                <span class="progress-meter" style="width: <%= results[i].scores[j].percentage || 0 %>%">
+                                    <p class="progress-meter-text"><%= results[i].scores[j].percentage || 0 %>%</p>
+                                </span>
+                            </div>
+                        </li>
+                    <% } %>
+                <% } else { %>
+                    <span class="ballot-no-votes">Nobody has voted on this ballot yet.</span>
                 <% } %>
             </ul>
         </div>

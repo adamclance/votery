@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+// Middleware to handle errors
+router.use((err, req, res, next) => {
+	// Do logging and user-friendly error message display
+	console.error(err);
+	res.status(500).render('error');
+});
+
 // Global middleware to attach locals
 router.use((req, res, next) => {
 	res.locals.user = req.user;

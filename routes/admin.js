@@ -27,11 +27,17 @@ module.exports = (router) => {
     });
 
     router.get('/ballots/edit/:type/:id', (req, res) => {
-        res.render('editBallot', {
-            ballot: ballots.getBallot(req.params.type, req.params.id),
-            type: req.params.type,
-            id: req.params.id
-        });
+        const ballot = ballots.getBallot(req.params.type, req.params.id);
+
+        if (ballot) {
+            res.render('editBallot', {
+                ballot,
+                type: req.params.type,
+                id: req.params.id
+            });
+        } else {
+            res.render('404');
+        }
     });
 
     router.post('/ballots/edit', (req, res) => {
@@ -51,6 +57,15 @@ module.exports = (router) => {
 
     router.get('/ballots/open/:type/:id', (req, res) => {
         ballots.openBallot(req.params.type, req.params.id);
+        res.redirect(`/ballots/manage`);
+    });
+
+    router.get('/ballots/create', (req, res) => {
+        res.render('createBallot');
+    });
+
+    router.post('/ballots/create', (req, res) => {
+        ballots.createBallot(req.body);
         res.redirect(`/ballots/manage`);
     });
 }

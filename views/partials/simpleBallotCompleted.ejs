@@ -1,5 +1,20 @@
 <% for (var i = 0; i < results.length; i++) { %>
     <% if (results[i].container === container) { %>
+        <% 
+        var scoreClassNo="";
+        var scoreClassYes="";
+
+        if (!results[i].scores.no.percentage) {
+            scoreClassNo="no-votes";
+            results[i].scores.no.percentage = 0;
+        } 
+
+        if (!results[i].scores.yes.percentage) {
+            scoreClassYes="no-votes";
+            results[i].scores.yes.percentage = 0;
+        }
+        %>
+
         <div class="card cell small-12 medium-6">
             <div class="card-divider">
                 RESULTS FOR <%= results[i].name %> <% if (ballots[i].closed) { %>(CLOSED)<% } %>
@@ -11,7 +26,7 @@
 
                     <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= results[i].scores.yes.percentage %>" aria-valuemin="0" aria-valuetext="<%= results[i].scores.yes.percentage %> percent" aria-valuemax="100">
                         <span class="progress-meter" style="width: <%= results[i].scores.yes.percentage %>%">
-                            <p class="progress-meter-text"><%= results[i].scores.yes.percentage %>%</p>
+                            <p class="progress-meter-text <%= scoreClassYes %>"><%= results[i].scores.yes.percentage %>%</p>
                         </span>
                     </div>
                 </li>
@@ -21,7 +36,7 @@
 
                     <div class="progress" role="progressbar" tabindex="0" aria-valuenow="<%= results[i].scores.no.percentage %>" aria-valuemin="0" aria-valuetext="<%= results[i].scores.no.percentage %> percent" aria-valuemax="100">
                         <span class="progress-meter" style="width: <%= results[i].scores.no.percentage %>%">
-                            <p class="progress-meter-text"><%= results[i].scores.no.percentage %>%</p>
+                            <p class="progress-meter-text <%= scoreClassNo %>"><%= results[i].scores.no.percentage %>%</p>
                         </span>
                     </div>
                 </li>

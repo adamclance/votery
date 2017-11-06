@@ -53,3 +53,30 @@ exports.openBallot = (type, id) => {
     let ballot = this.getBallot(type, +id);
     ballot.closed = false;
 };
+
+exports.createBallot = (data) => {
+    let ballots = map[data.type];
+    let options = [];
+    data.closed = false;
+
+    // Generate ballot id
+    const lastIndex = ballots.length - 1;
+    let lastId = ballots[lastIndex].id;
+    data.id = lastId + 1;
+
+    // Normalize options data
+    if (data.type === 'ranked' || data.type === 'pick-two') {
+        let optionId = 1;
+
+        _.each(data.options, (option) => {
+            options.push({ id: optionId, name: option });
+            optionId++;
+        });
+
+        data.options = options;
+    } else {
+        delete data.options;
+    }
+
+    ballots.push(data);
+}

@@ -4,6 +4,7 @@ import { foundation } from '../../node_modules/foundation-sites/dist/js/foundati
 import voteRankedPage from './voteRanked';
 import voteSimplePage from './voteSimple';
 import votePickTwoPage from './votePickTwo';
+import createBallotPage from './createBallot';
 
 $(document).ready(function() {
     $(document).foundation();
@@ -51,4 +52,8 @@ if (windowLoc.indexOf('vote/simple') > -1) {
 
 if (windowLoc.indexOf('vote/pick-two') > -1) {
     new votePickTwoPage();
+}
+
+if (windowLoc.indexOf('ballots/create') > -1) {
+    new createBallotPage();
 }

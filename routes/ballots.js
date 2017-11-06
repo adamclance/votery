@@ -10,11 +10,15 @@ module.exports = (router) => {
         const ballot = util.getBallotById(req.params.id, ballotsRanked.ballotsRanked);
         const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsRanked.ballotsRankedSubmitted);
     
-        res.render('voteRanked', {
-            ballot,
-            ballotId: req.params.id,
-            alreadyVoted
-        });
+        if (ballot) {
+            res.render('voteRanked', {
+                ballot,
+                ballotId: req.params.id,
+                alreadyVoted
+            });
+        } else {
+            res.render('404');
+        }
     });
     
     router.post('/vote/ranked', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
@@ -25,11 +29,15 @@ module.exports = (router) => {
         const ballot = util.getBallotById(req.params.id, ballotsSimple.ballotsSimple);
         const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsSimple.ballotsSimpleSubmitted);
     
-        res.render('voteSimple', {
-            ballot,
-            ballotId: req.params.id,
-            alreadyVoted
-        });
+        if (ballot) {
+            res.render('voteSimple', {
+                ballot,
+                ballotId: req.params.id,
+                alreadyVoted
+            });
+        } else {
+            res.render('404');
+        }
     });
     
     router.post('/vote/simple', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
@@ -40,11 +48,15 @@ module.exports = (router) => {
         const ballot = util.getBallotById(req.params.id, ballotsPickTwo.ballotsPickTwo);
         const alreadyVoted = util.alreadyVoted(req.user.id, req.params.id, ballotsPickTwo.ballotsPickTwoSubmitted);
     
-        res.render('votePickTwo', {
-            ballot,
-            ballotId: req.params.id,
-            alreadyVoted
-        });
+        if (ballot) {
+            res.render('votePickTwo', {
+                ballot,
+                ballotId: req.params.id,
+                alreadyVoted
+            });
+        } else {
+            res.render('404');
+        }
     });
     
     router.post('/vote/pick-two', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {
@@ -58,8 +70,14 @@ module.exports = (router) => {
     });
     
     router.get('/ballots/submitted/:type/:id', (req, res) => {
-        res.render('ballotsSubmitted', {
-            ballots: ballotsSubmitted.getSubmitted(req)
-        });
+        const ballots = ballotsSubmitted.getSubmitted(req);
+
+        if (ballots.length) {
+            res.render('ballotsSubmitted', {
+                ballots
+            });
+        } else {
+            res.render('404');
+        }
     });
 }
