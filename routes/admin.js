@@ -38,4 +38,9 @@ module.exports = (router) => {
         ballots.updateBallot(req.body.type, req.body.id, req.body);
         res.redirect(`/ballots/manage`);
     });
+
+    router.get('/ballots/delete/:type/:id', (req, res) => {
+        ballots.deleteBallot(req.params.type, req.params.id);
+        res.redirect(`/ballots/manage`);
+    });
 }
