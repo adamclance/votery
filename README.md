@@ -1,6 +1,6 @@
 A simple voting app written in nodejs.
 
-View live demo here: http://104.196.104.234:3000
+View live demo here: https://3000-dot-3230326-dot-devshell.appspot.com/
 
 ## Instructions
 

@@ -1,4 +1,5 @@
 const passport = require('passport');
+const users = require('../controllers/users');
 
 module.exports = (router) => {
     router.post('/login', passport.authenticate('local', { failureRedirect: '/?loginFailed=true' }), (req, res) => {
@@ -13,15 +14,15 @@ module.exports = (router) => {
     });
     
     router.post('/register', (req, res) => {
-        users.create(req.body);
-    
-        req.login(newUser, (err) => {
-            if (!err) {
-                res.redirect('/');
-            } else {
-                //handle error
-            }
-        })
+        users.create(req.body, (newUser) => {
+            req.login(newUser, (err) => {
+                if (!err) {
+                    res.redirect('/');
+                } else {
+                    //handle error
+                }
+            })
+        });
     });
     
     router.get('/account', require('connect-ensure-login').ensureLoggedIn('/?login=true'), (req, res) => {

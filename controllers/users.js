@@ -1,5 +1,5 @@
 const DB = require('../db/users');
-const uuid = require('uuid/v4');
+const uuidv4 = require('uuid/v4');
 const _ = require('underscore');
 
 exports.findById = (id, cb) => {
@@ -31,7 +31,7 @@ exports.getRoleById = (id) => {
 	return user.role;
 }
 
-exports.create = (data) => {
+exports.create = (data, cb) => {
 	const newUser = {
 		id: uuidv4(),
 		username: data.username,
@@ -52,4 +52,6 @@ exports.create = (data) => {
 	}
 
 	DB.userData.push(newUser);
+
+	cb(newUser);
 };
