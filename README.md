@@ -1,6 +1,6 @@
 A simple voting app written in nodejs.
 
-View live demo here: https://3000-dot-3230326-dot-devshell.appspot.com/
+**This applicaiton was made to showcase my skillset to potential future employers since most of the development in my career has been in private and proprietary applications. It is in no way a complete product but functional as an example and works as such.
 
 ## Instructions
 
